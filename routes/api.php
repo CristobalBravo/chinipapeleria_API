@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Usuario;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+//Usuario
+Route::post('usuario/all','UsuarioController@all');
+Route::post('usuario/buscar','UsuarioController@buscarPorID');
+Route::post('usuario/crear','UsuarioController@crear');
+Route::post('usuario/editar','UsuarioController@editar');
+Route::post('usuario/eliminar','UsuarioController@eliminar');
