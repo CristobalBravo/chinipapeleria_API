@@ -37,3 +37,11 @@ Route::post('estadoPedido/buscar','EstadoPedidoController@buscarPorID');
 Route::post('estadoPedido/crear','EstadoPedidoController@crear');
 Route::post('estadoPedido/editar','EstadoPedidoController@editar');
 Route::post('estadoPedido/eliminar','EstadoPedidoController@eliminar');
+
+
+//Categoria
+Route::post('categoria/all','CategoriaController@all');
+Route::post('categoria/buscar','CategoriaController@buscarPorID');
+Route::post('categoria/crear','CategoriaController@crear');
+Route::post('categoria/editar','CategoriaController@editar');
+Route::post('categoria/eliminar','CategoriaController@eliminar');
