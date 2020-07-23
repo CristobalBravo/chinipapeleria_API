@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MedioPago;
+use App\Models\EstadoPedido;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class MedioPagoController extends Controller
+class EstadoPedidoController extends Controller
 {
     public function all(){
-        $medioPago= MedioPago::all();
+        $estadoPedido= EstadoPedido::all();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'medioPago'=>$medioPago];
+            'medioPago'=>$estadoPedido];
         return response()->json($data);
     }
 
@@ -25,16 +25,16 @@ class MedioPagoController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccion un id de medio de pago para buscar";
+            $result->message = "Debes seleccion un id de estadoPedido de pago para buscar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $medioPago = MedioPago::findOrFail($id);
+            $estadoPedido = EstadoPedido::findOrFail($id);
             $result->code = 200;
             $result->status='success';
-            $result->medioPago=$medioPago;
+            $result->estadoPedido=$estadoPedido;
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
@@ -44,17 +44,15 @@ class MedioPagoController extends Controller
         return response()->json($result);
     }
 
-
-
     Public function crear(Request $request){
-        $medioPago = new MedioPago();
-        $medioPago->nombre = $request->nombre;
-        $medioPago->descripcion = $request->descripcion;
-        $medioPago->save();
+        $estadoPedido = new EstadoPedido();
+        $estadoPedido->nombre = $request->nombre;
+        $estadoPedido->descripcion = $request->descripcion;
+        $estadoPedido->save();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'medioPago'=>$medioPago];
+            'medioPago'=>$estadoPedido];
         return response()->json($data);
     }
 
@@ -65,23 +63,23 @@ class MedioPagoController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id de Medio De Pago para editar";
+            $result->message = "Debes seleccionar un id de Estado de pedido para editar";
             return response()->json($result);
         }
 
         try{
-            $medioPago = MedioPago::findOrFail($request->id);
-            $medioPago->nombre = $request->nombre;
-            $medioPago->descripcion = $request->descripcion;
-            $medioPago->save();
+            $estadoPedido = EstadoPedido::findOrFail($request->id);
+            $estadoPedido->nombre = $request->nombre;
+            $estadoPedido->descripcion = $request->descripcion;
+            $estadoPedido->save();
             $result->code = 200;
             $result->status='success';
-            $result->medioPago=$medioPago;
+            $result->estadoPedido=$estadoPedido;
 
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
-            $result->message='No se encontro el id del Medio De Pago';
+            $result->message='No se encontro el id del Estado de Pedido';
         }
 
         return response()->json($result);
@@ -95,17 +93,17 @@ class MedioPagoController extends Controller
         if($request->id == ''){
             $result->code = 400;
             $result->status='error';
-            $result->message = "Debes seleccion un id de Medio de Pago para Eliminar";
+            $result->message = "Debes seleccion un id de Estado de Pedido para Eliminar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $medioPago = MedioPago::findOrFail($id);
-            $medioPago->delete();
+            $estadoPedido = EstadoPedido::findOrFail($id);
+            $estadoPedido->delete();
             $result->code = 200;
             $result->status='success';
-            $result->message='Medio De Pago Eliminado Exitosamente';
+            $result->message='Estado de Pedido Eliminado Exitosamente';
         }catch(ModelNotFoundException $e){
             $result->code = 400;
             $result->status='error';

@@ -30,3 +30,10 @@ Route::post('medioPago/buscar','MedioPagoController@buscarPorID');
 Route::post('medioPago/crear','MedioPagoController@crear');
 Route::post('medioPago/editar','MedioPagoController@editar');
 Route::post('medioPago/eliminar','MedioPagoController@eliminar');
+
+//Estado De Pedido
+Route::post('estadoPedido/all','EstadoPedidoController@all');
+Route::post('estadoPedido/buscar','EstadoPedidoController@buscarPorID');
+Route::post('estadoPedido/crear','EstadoPedidoController@crear');
+Route::post('estadoPedido/editar','EstadoPedidoController@editar');
+Route::post('estadoPedido/eliminar','EstadoPedidoController@eliminar');
