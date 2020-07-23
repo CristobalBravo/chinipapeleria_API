@@ -45,3 +45,10 @@ Route::post('categoria/buscar','CategoriaController@buscarPorID');
 Route::post('categoria/crear','CategoriaController@crear');
 Route::post('categoria/editar','CategoriaController@editar');
 Route::post('categoria/eliminar','CategoriaController@eliminar');
+
+//Marca
+Route::post('marca/all','MarcaController@all');
+Route::post('marca/buscar','MarcaController@buscarPorID');
+Route::post('marca/crear','MarcaController@crear');
+Route::post('marca/editar','MarcaController@editar');
+Route::post('marca/eliminar','MarcaController@eliminar');
