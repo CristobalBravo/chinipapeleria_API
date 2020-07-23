@@ -37,3 +37,17 @@ Route::post('estadoPedido/buscar','EstadoPedidoController@buscarPorID');
 Route::post('estadoPedido/crear','EstadoPedidoController@crear');
 Route::post('estadoPedido/editar','EstadoPedidoController@editar');
 Route::post('estadoPedido/eliminar','EstadoPedidoController@eliminar');
+
+//Seccion
+Route::post('seccion/all','seccionController@all');
+Route::post('seccion/buscar','seccionController@buscarPorID');
+Route::post('seccion/crear','seccionController@crear');
+Route::post('seccion/editar','seccionController@editar');
+Route::post('seccion/eliminar','seccionController@eliminar');
+
+//Tipo tapa
+Route::post('tipoTapa/all','tipoTapaController@all');
+Route::post('tipoTapa/buscar','tipoTapaController@buscarPorID');
+Route::post('tipoTapa/crear','tipoTapaController@crear');
+Route::post('tipoTapa/editar','tipoTapaController@editar');
+Route::post('tipoTapa/eliminar','tipoTapaController@eliminar');
