@@ -22,3 +22,11 @@ Route::post('usuario/buscar','UsuarioController@buscarPorID');
 Route::post('usuario/crear','UsuarioController@crear');
 Route::post('usuario/editar','UsuarioController@editar');
 Route::post('usuario/eliminar','UsuarioController@eliminar');
+
+
+//medio de pago
+Route::post('medioPago/all','MedioPagoController@all');
+Route::post('medioPago/buscar','MedioPagoController@buscarPorID');
+Route::post('medioPago/crear','MedioPagoController@crear');
+Route::post('medioPago/editar','MedioPagoController@editar');
+Route::post('medioPago/eliminar','MedioPagoController@eliminar');
