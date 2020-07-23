@@ -51,3 +51,10 @@ Route::post('tipoTapa/buscar','tipoTapaController@buscarPorID');
 Route::post('tipoTapa/crear','tipoTapaController@crear');
 Route::post('tipoTapa/editar','tipoTapaController@editar');
 Route::post('tipoTapa/eliminar','tipoTapaController@eliminar');
+
+//Tipo espiral
+Route::post('tipoEspiral/all','tipoEspiralController@all');
+Route::post('tipoEspiral/buscar','tipoEspiralController@buscarPorID');
+Route::post('tipoEspiral/crear','tipoEspiralController@crear');
+Route::post('tipoEspiral/editar','tipoEspiralController@editar');
+Route::post('tipoEspiral/eliminar','tipoEspiralController@eliminar');

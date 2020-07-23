@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TipoTapa;
+use App\Models\TipoEspiral;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class TipoTapaController extends Controller
+class TipoEspiralController extends Controller
 {
     public function all(){
-        $tipotapa= TipoTapa::all();
+        $tipoespiral= TipoEspiral::all();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'usuario'=>$tipotapa];
+            'usuario'=>$tipoespiral];
         return response()->json($data);
     }
 
@@ -24,33 +24,34 @@ class TipoTapaController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de tipotapa para buscar";
+            $result->message = "Debes seleccionar un id de tipoespiral para buscar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
+            $tipoespiral = TipoEspiral::findOrFail($id);
             $result->code = 200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->tipoespiral=$tipoespiral;
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
-            $result->message='No se encontro el id';
+            $result->message='No se encontro el id del tipoespiral';
         }
 
         return response()->json($result);
     }
 
     Public function crear(Request $request){
-        $tipotapa = new TipoTapa();
-        $tipotapa->nombre = $request->nombre;
-        $tipotapa->save();
+        $tipoespiral = new TipoEspiral();
+        $tipoespiral->nombre = $request->nombre;
+        $tipoespiral->descripcion = $request->descripcion;
+        $tipoespiral->save();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'tipotapa'=>$tipotapa];
+            'tipoespiral'=>$tipoespiral];
         return response()->json($data);
     }
 
@@ -61,17 +62,18 @@ class TipoTapaController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id de tipotapa para editar";
+            $result->message = "Debes seleccionar un id de tipoespiral para editar";
             return response()->json($result);
         }
 
         try{
-            $tipotapa = Tipotapa::findOrFail($request->id);
-            $tipotapa->nombre = $request->nombre;
-            $tipotapa->save();
+            $tipoespiral = TipoEspiral::findOrFail($request->id);
+            $tipoespiral->nombre = $request->nombre;
+            $tipoespiral->descripcion = $request->descripcion;
+            $tipoespiral->save();
             $result->code =200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->tipoespiral=$tipoespiral;
 
         }catch(ModelNotFoundException $e){
             $result->code =400;
@@ -90,17 +92,17 @@ class TipoTapaController extends Controller
         if($request->id == ''){
             $result->code = 400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de tipotapa para Eliminar";
+            $result->message = "Debes seleccionar un id de tipoespiral para Eliminar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
-            $tipotapa->delete();
+            $tipoespiral = TipoEspiral::findOrFail($id);
+            $tipoespiral->delete();
             $result->code = 200;
             $result->status='success';
-            $result->message='Tipotapa Eliminado Exitosamente';
+            $result->message='Tipoespiral Eliminado Exitosamente';
         }catch(ModelNotFoundException $e){
             $result->code = 400;
             $result->status='error';
