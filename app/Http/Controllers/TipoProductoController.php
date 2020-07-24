@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\TipoProducto;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class UsuarioController extends Controller
+use Illuminate\Http\Request;
+
+class TipoProductoController extends Controller
 {
     public function all(){
-        $usuario= Usuario::all();
+        $tipoProducto= TipoProducto::all();
         $data=[
             'code'=>200,
-            'status'=> 'success',
-            'usuario'=>$usuario];
+            'status'=>'success',
+            'tipoProducto'=>$tipoProducto
+        ];
         return response()->json($data);
     }
 
@@ -25,16 +26,16 @@ class UsuarioController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de usuario para buscar";
+            $result->message = "Debes seleccionar un id del tipo producto para buscar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $usuario = Usuario::findOrFail($id);
+            $tipoProducto = TipoProducto::findOrFail($id);
             $result->code = 200;
             $result->status='success';
-            $result->usuario=$usuario;
+            $result->tipoProducto=$tipoProducto;
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
@@ -45,20 +46,13 @@ class UsuarioController extends Controller
     }
 
     Public function crear(Request $request){
-        $usuario = new Usuario();
-        $usuario->nombre = $request->nombre;
-        $usuario->apellido = $request->apellido;
-        $usuario->rut = $request->rut;
-        $usuario->codigo_verificacion = $request->codigo_verificacion;
-        $usuario->email = $request->email;
-        $usuario->numero = $request->numero;
-        $usuario->ciudad = $request->ciudad;
-        $usuario->calle = $request->calle;
-        $usuario->save();
+        $tipoProducto = new TipoProducto();
+        $tipoProducto->nombre = $request->nombre;
+        $tipoProducto->save();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'usuario'=>$usuario];
+            'tipo Producto'=>$tipoProducto];
         return response()->json($data);
     }
 
@@ -69,29 +63,22 @@ class UsuarioController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id de usuario para editar";
+            $result->message = "Debes seleccionar un id del tipo producto para editar";
             return response()->json($result);
         }
 
         try{
-            $usuario = Usuario::findOrFail($request->id);
-            $usuario->nombre = $request->nombre;
-            $usuario->apellido = $request->apellido;
-            $usuario->rut = $request->rut;
-            $usuario->codigo_verificacion = $request->codigo_verificacion;
-            $usuario->email = $request->email;
-            $usuario->numero = $request->numero;
-            $usuario->ciudad = $request->ciudad;
-            $usuario->calle = $request->calle;
-            $usuario->save();
-            $result->code =200;
+            $tipoProducto = TipoProducto::findOrFail($request->id);
+            $tipoProducto->nombre = $request->nombre;
+            $tipoProducto->save();
+            $result->code = 200;
             $result->status='success';
-            $result->usuario=$usuario;
+            $result->tipoProducto=$tipoProducto;
 
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
-            $result->message='No se encontro el id';
+            $result->message='No se encontro el id del tipo producto';
         }
 
         return response()->json($result);
@@ -105,17 +92,17 @@ class UsuarioController extends Controller
         if($request->id == ''){
             $result->code = 400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de usuario para Eliminar";
+            $result->message = "Debes seleccionar un id del tipo producto para Eliminar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $usuario = Usuario::findOrFail($id);
-            $usuario->delete();
+            $tipoProducto = TipoProducto::findOrFail($id);
+            $tipoProducto->delete();
             $result->code = 200;
             $result->status='success';
-            $result->message='Cliente Eliminado Exitosamente';
+            $result->message='Tipo Producto Eliminado Exitosamente';
         }catch(ModelNotFoundException $e){
             $result->code = 400;
             $result->status='error';

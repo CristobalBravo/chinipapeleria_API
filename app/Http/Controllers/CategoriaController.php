@@ -27,7 +27,7 @@ class CategoriaController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de la categoria de pago para buscar";
+            $result->message = "Debes seleccionar un id de la categoria para buscar";
             return response()->json($result);
         }
 
@@ -54,7 +54,7 @@ class CategoriaController extends Controller
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'medioPago'=>$categoria];
+            'categoria'=>$categoria];
         return response()->json($data);
     }
 
@@ -95,7 +95,7 @@ class CategoriaController extends Controller
         if($request->id == ''){
             $result->code = 400;
             $result->status='error';
-            $result->message = "Debes seleccion un id de la categoria para Eliminar";
+            $result->message = "Debes seleccionar un id de la categoria para Eliminar";
             return response()->json($result);
         }
 
