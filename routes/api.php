@@ -79,3 +79,17 @@ Route::post('tipoHoja/buscar','tipoHojaController@buscarPorID');
 Route::post('tipoHoja/crear','tipoHojaController@crear');
 Route::post('tipoHoja/editar','tipoHojaController@editar');
 Route::post('tipoHoja/eliminar','tipoHojaController@eliminar');
+
+//Tamaño TipoLinea
+Route::post('tipoLinea/all','tipoLineaController@all');
+Route::post('tipoLinea/buscar','tipoLineaController@buscarPorID');
+Route::post('tipoLinea/crear','tipoLineaController@crear');
+Route::post('tipoLinea/editar','tipoLineaController@editar');
+Route::post('tipoLinea/eliminar','tipoLineaController@eliminar');
+
+//Tamaño TipoPunta
+Route::post('tipoPunta/all','tipoPuntaController@all');
+Route::post('tipoPunta/buscar','tipoPuntaController@buscarPorID');
+Route::post('tipoPunta/crear','tipoPuntaController@crear');
+Route::post('tipoPunta/editar','tipoPuntaController@editar');
+Route::post('tipoPunta/eliminar','tipoPuntaController@eliminar');
