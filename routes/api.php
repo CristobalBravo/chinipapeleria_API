@@ -71,6 +71,14 @@ Route::post('tipoPlanificador/eliminar','TipoPlanificadorController@eliminar');
 Route::post('venta/all','VentaController@all');
 Route::post('venta/buscar','VentaController@buscarPorID');
 Route::post('venta/crear','VentaController@crear');
+/* Para Posible Implementacion
 Route::post('venta/editar','VentaController@editar');
-Route::post('venta/eliminar','VentaController@eliminar');
+Route::post('venta/eliminar','VentaController@eliminar');*/
+
+//pedido
+Route::post('pedido/all','PedidoController@all');
+Route::post('pedido/buscar','PedidoController@buscarPorID');
+Route::post('pedido/crear','PedidoController@crear');
+Route::post('pedido/editar','PedidoController@editar');
+Route::post('pedido/eliminar','PedidoController@eliminar');
 

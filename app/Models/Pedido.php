@@ -11,14 +11,18 @@ class Pedido extends Model
     public $timestamps=false;
 
     public function usuario(){
-        return $this->belongTo('App\Models\Usuario','Usuario_id');
+        return $this->belongsTo('App\Models\Usuario','Usuario_id');
     }
 
     public function venta(){
-        return $this->belongTo('App\Models\Venta','Venta_id');
+        return $this->belongsTo('App\Models\Venta','Venta_id');
     }
 
     public function estadoPedido(){
-        return $this->belongTo('App\Models\EstadoPedido','EstadoPedido_id');
+        return $this->belongsTo('App\Models\EstadoPedido','EstadoPedido_id');
+    }
+
+    public function detallePedido(){
+        return $this->hasmany('App\Models\EstadoPedido');
     }
 }
