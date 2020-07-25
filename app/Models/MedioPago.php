@@ -10,7 +10,7 @@ class MedioPago extends Model
     protected $table = 'mediopago';
     public $timestamps=false;
 
-    public function pedido(){
+    public function Venta(){
         return $this->hasMany('App\Models\Venta');
     }
 }

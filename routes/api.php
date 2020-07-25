@@ -67,3 +67,10 @@ Route::post('tipoPlanificador/crear','TipoPlanificadorController@crear');
 Route::post('tipoPlanificador/editar','TipoPlanificadorController@editar');
 Route::post('tipoPlanificador/eliminar','TipoPlanificadorController@eliminar');
 
+//Venta
+Route::post('venta/all','VentaController@all');
+Route::post('venta/buscar','VentaController@buscarPorID');
+Route::post('venta/crear','VentaController@crear');
+Route::post('venta/editar','VentaController@editar');
+Route::post('venta/eliminar','VentaController@eliminar');
+

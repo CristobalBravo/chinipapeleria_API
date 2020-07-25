@@ -14,6 +14,6 @@ class Venta extends Model
     }
 
     public function medioPago(){
-        return $this->belongTo('App\Models\MedioPago','MedioPago_id');
+        return $this->belongsTo('App\Models\MedioPago','MedioPago_id');
     }
 }
