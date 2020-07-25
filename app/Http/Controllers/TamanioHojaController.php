@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TipoTapa;
+use App\Models\TamanioHoja;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class TipoTapaController extends Controller
+class TamanioHojaController extends Controller
 {
     public function all(){
-        $tipotapa= TipoTapa::all();
+        $tamaniohoja= TamanioHoja::all();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'usuario'=>$tipotapa];
+            'usuario'=>$tamaniohoja];
         return response()->json($data);
     }
 
@@ -24,16 +24,16 @@ class TipoTapaController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de tipotapa para buscar";
+            $result->message = "Debes seleccionar un id de tamaño de hoja para buscar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
+            $tamaniohoja = TamanioHoja::findOrFail($id);
             $result->code = 200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->tamaniohoja=$tamaniohoja;
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
@@ -44,13 +44,16 @@ class TipoTapaController extends Controller
     }
 
     Public function crear(Request $request){
-        $tipotapa = new TipoTapa();
-        $tipotapa->nombre = $request->nombre;
-        $tipotapa->save();
+        $tamaniohoja = new TamanioHoja();
+        $tamaniohoja->nombre = $request->nombre;
+        $tamaniohoja->ancho = $request->ancho;
+        $tamaniohoja->largo = $request->largo;
+        $tamaniohoja->unidad_medida = $request->unidad_medida;
+        $tamaniohoja->save();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'tipotapa'=>$tipotapa];
+            'tamaniohoja'=>$tamaniohoja];
         return response()->json($data);
     }
 
@@ -61,17 +64,20 @@ class TipoTapaController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id de tipotapa para editar";
+            $result->message = "Debes seleccionar un id de tamaño de hoja para editar";
             return response()->json($result);
         }
 
         try{
-            $tipotapa = TipoTapa::findOrFail($request->id);
-            $tipotapa->nombre = $request->nombre;
-            $tipotapa->save();
+            $tamaniohoja = TamanioHoja::findOrFail($request->id);
+            $tamaniohoja->nombre = $request->nombre;
+            $tamaniohoja->ancho = $request->ancho;
+            $tamaniohoja->largo = $request->largo;
+            $tamaniohoja->unidad_medida = $request->unidad_medida;
+            $tamaniohoja->save();
             $result->code =200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->tamaniohoja=$tamaniohoja;
 
         }catch(ModelNotFoundException $e){
             $result->code =400;
@@ -90,17 +96,17 @@ class TipoTapaController extends Controller
         if($request->id == ''){
             $result->code = 400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de tipotapa para Eliminar";
+            $result->message = "Debes seleccionar un id de tamaño hoja para Eliminar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
-            $tipotapa->delete();
+            $tamaniohoja = TamanioHoja::findOrFail($id);
+            $tamaniohoja->delete();
             $result->code = 200;
             $result->status='success';
-            $result->message='Tipotapa Eliminado Exitosamente';
+            $result->message='TamanioHoja Eliminado Exitosamente';
         }catch(ModelNotFoundException $e){
             $result->code = 400;
             $result->status='error';

@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TipoTapa;
+use App\Models\TipoHoja;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class TipoTapaController extends Controller
+class TipoHojaController extends Controller
 {
     public function all(){
-        $tipotapa= TipoTapa::all();
+        $tipohoja= TipoHoja::all();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'usuario'=>$tipotapa];
+            'usuario'=>$tipohoja];
         return response()->json($data);
     }
 
@@ -24,16 +24,16 @@ class TipoTapaController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de tipotapa para buscar";
+            $result->message = "Debes seleccionar un id de tipohoja para buscar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
+            $tipohoja = TipoHoja::findOrFail($id);
             $result->code = 200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->tipohoja=$tipohoja;
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
@@ -44,13 +44,14 @@ class TipoTapaController extends Controller
     }
 
     Public function crear(Request $request){
-        $tipotapa = new TipoTapa();
-        $tipotapa->nombre = $request->nombre;
-        $tipotapa->save();
+        $tipohoja = new TipoHoja();
+        $tipohoja->nombre = $request->nombre;
+        $tipohoja->gramaje = $request->gramaje;
+        $tipohoja->save();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'tipotapa'=>$tipotapa];
+            'tipohoja'=>$tipohoja];
         return response()->json($data);
     }
 
@@ -61,17 +62,18 @@ class TipoTapaController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id de tipotapa para editar";
+            $result->message = "Debes seleccionar un id de tipohoja para editar";
             return response()->json($result);
         }
 
         try{
-            $tipotapa = TipoTapa::findOrFail($request->id);
-            $tipotapa->nombre = $request->nombre;
-            $tipotapa->save();
+            $tipohoja = TipoHoja::findOrFail($request->id);
+            $tipohoja->nombre = $request->nombre;
+            $tipohoja->gramaje = $request->gramaje;
+            $tipohoja->save();
             $result->code =200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->tipohoja=$tipohoja;
 
         }catch(ModelNotFoundException $e){
             $result->code =400;
@@ -96,11 +98,11 @@ class TipoTapaController extends Controller
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
-            $tipotapa->delete();
+            $tipohoja = TipoHoja::findOrFail($id);
+            $tipohoja->delete();
             $result->code = 200;
             $result->status='success';
-            $result->message='Tipotapa Eliminado Exitosamente';
+            $result->message='tipohoja Eliminado Exitosamente';
         }catch(ModelNotFoundException $e){
             $result->code = 400;
             $result->status='error';

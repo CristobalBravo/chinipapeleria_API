@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TipoTapa;
+use App\Models\Diseno;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class TipoTapaController extends Controller
+class DisenoController extends Controller
 {
     public function all(){
-        $tipotapa= TipoTapa::all();
+        $diseno= Diseno::all();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'usuario'=>$tipotapa];
+            'medioPago'=>$diseno];
         return response()->json($data);
-    }
+    } 
 
     public function buscarPorID(Request $request){
         $result = new \stdClass();
@@ -24,16 +24,16 @@ class TipoTapaController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de tipotapa para buscar";
+            $result->message = "Debes seleccionar un id de diseño para buscar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
+            $diseno = Diseno::findOrFail($id);
             $result->code = 200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->diseno=$diseno;
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
@@ -44,13 +44,14 @@ class TipoTapaController extends Controller
     }
 
     Public function crear(Request $request){
-        $tipotapa = new TipoTapa();
-        $tipotapa->nombre = $request->nombre;
-        $tipotapa->save();
+        $diseno = new Diseno();
+        $diseno->nombre = $request->nombre;
+        $diseno->path = $request->path;
+        $diseno->save();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'tipotapa'=>$tipotapa];
+            'diseño'=>$diseno];
         return response()->json($data);
     }
 
@@ -61,22 +62,23 @@ class TipoTapaController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id de tipotapa para editar";
+            $result->message = "Debes seleccionar un id de diseño para editar";
             return response()->json($result);
         }
 
         try{
-            $tipotapa = TipoTapa::findOrFail($request->id);
-            $tipotapa->nombre = $request->nombre;
-            $tipotapa->save();
+            $diseno = Diseno::findOrFail($request->id);
+            $diseno->nombre = $request->nombre;
+            $diseno->path = $request->path;
+            $diseno->save();
             $result->code =200;
             $result->status='success';
-            $result->tipotapa=$tipotapa;
+            $result->diseno=$diseno;
 
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
-            $result->message='No se encontro el id';
+            $result->message='No se encontro el id de diseño';
         }
 
         return response()->json($result);
@@ -90,17 +92,17 @@ class TipoTapaController extends Controller
         if($request->id == ''){
             $result->code = 400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id de tipotapa para Eliminar";
+            $result->message = "Debes seleccionar un id de seccion para Eliminar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $tipotapa = Tipotapa::findOrFail($id);
-            $tipotapa->delete();
+            $diseno = Diseno::findOrFail($id);
+            $diseno->delete();
             $result->code = 200;
             $result->status='success';
-            $result->message='Tipotapa Eliminado Exitosamente';
+            $result->message='Diseño Eliminado Exitosamente';
         }catch(ModelNotFoundException $e){
             $result->code = 400;
             $result->status='error';
