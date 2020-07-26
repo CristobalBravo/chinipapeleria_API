@@ -24,4 +24,8 @@ class Producto extends Model
     public function detallePedido(){
         return $this->hasmany('App\Models\DetallePedido');
     }
+
+    public function lapiz(){
+        return $this->hasOne('App\Models\Lapiz');
+    }
 }

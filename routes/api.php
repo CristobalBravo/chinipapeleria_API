@@ -150,3 +150,10 @@ Route::post('tipoPunta/buscar','tipoPuntaController@buscarPorID');
 Route::post('tipoPunta/crear','tipoPuntaController@crear');
 Route::post('tipoPunta/editar','tipoPuntaController@editar');
 Route::post('tipoPunta/eliminar','tipoPuntaController@eliminar');
+
+//Tamaño Lapiz
+Route::post('lapiz/all','lapizController@all');
+Route::post('lapiz/buscar','lapizController@buscarPorID');
+Route::post('lapiz/crear','lapizController@crear');
+Route::post('lapiz/editar','lapizController@editar');
+Route::post('lapiz/eliminar','lapizController@eliminar');
