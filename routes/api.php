@@ -88,3 +88,10 @@ Route::post('producto/buscar','ProductoController@buscarPorID');
 Route::post('producto/crear','ProductoController@crear');
 Route::post('producto/editar','ProductoController@editar');
 Route::post('producto/eliminar','ProductoController@eliminar');
+
+//detallePedido
+Route::post('detallePedido/all','DetallePedidoController@all');
+Route::post('detallePedido/buscar','DetallePedidoController@buscarPorID');
+Route::post('detallePedido/crear','DetallePedidoController@crear');
+Route::post('detallePedido/editar','DetallePedidoController@editar');
+Route::post('detallePedido/eliminar','DetallePedidoController@eliminar');
