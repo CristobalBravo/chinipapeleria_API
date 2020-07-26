@@ -95,3 +95,58 @@ Route::post('detallePedido/buscar','DetallePedidoController@buscarPorID');
 Route::post('detallePedido/crear','DetallePedidoController@crear');
 Route::post('detallePedido/editar','DetallePedidoController@editar');
 Route::post('detallePedido/eliminar','DetallePedidoController@eliminar');
+//Seccion
+Route::post('seccion/all','seccionController@all');
+Route::post('seccion/buscar','seccionController@buscarPorID');
+Route::post('seccion/crear','seccionController@crear');
+Route::post('seccion/editar','seccionController@editar');
+Route::post('seccion/eliminar','seccionController@eliminar');
+
+//Tipo tapa
+Route::post('tipoTapa/all','tipoTapaController@all');
+Route::post('tipoTapa/buscar','tipoTapaController@buscarPorID');
+Route::post('tipoTapa/crear','tipoTapaController@crear');
+Route::post('tipoTapa/editar','tipoTapaController@editar');
+Route::post('tipoTapa/eliminar','tipoTapaController@eliminar');
+
+//Tipo espiral
+Route::post('tipoEspiral/all','tipoEspiralController@all');
+Route::post('tipoEspiral/buscar','tipoEspiralController@buscarPorID');
+Route::post('tipoEspiral/crear','tipoEspiralController@crear');
+Route::post('tipoEspiral/editar','tipoEspiralController@editar');
+Route::post('tipoEspiral/eliminar','tipoEspiralController@eliminar');
+
+//Tipo diseño
+Route::post('diseno/all','disenoController@all');
+Route::post('diseno/buscar','disenoController@buscarPorID');
+Route::post('diseno/crear','disenoController@crear');
+Route::post('diseno/editar','disenoController@editar');
+Route::post('diseno/eliminar','disenoController@eliminar');
+
+//Tamaño Hoja
+Route::post('tamanioHoja/all','tamanioHojaController@all');
+Route::post('tamanioHoja/buscar','tamanioHojaController@buscarPorID');
+Route::post('tamanioHoja/crear','tamanioHojaController@crear');
+Route::post('tamanioHoja/editar','tamanioHojaController@editar');
+Route::post('tamanioHoja/eliminar','tamanioHojaController@eliminar');
+
+//Tamaño Hoja
+Route::post('tipoHoja/all','tipoHojaController@all');
+Route::post('tipoHoja/buscar','tipoHojaController@buscarPorID');
+Route::post('tipoHoja/crear','tipoHojaController@crear');
+Route::post('tipoHoja/editar','tipoHojaController@editar');
+Route::post('tipoHoja/eliminar','tipoHojaController@eliminar');
+
+//Tamaño TipoLinea
+Route::post('tipoLinea/all','tipoLineaController@all');
+Route::post('tipoLinea/buscar','tipoLineaController@buscarPorID');
+Route::post('tipoLinea/crear','tipoLineaController@crear');
+Route::post('tipoLinea/editar','tipoLineaController@editar');
+Route::post('tipoLinea/eliminar','tipoLineaController@eliminar');
+
+//Tamaño TipoPunta
+Route::post('tipoPunta/all','tipoPuntaController@all');
+Route::post('tipoPunta/buscar','tipoPuntaController@buscarPorID');
+Route::post('tipoPunta/crear','tipoPuntaController@crear');
+Route::post('tipoPunta/editar','tipoPuntaController@editar');
+Route::post('tipoPunta/eliminar','tipoPuntaController@eliminar');
