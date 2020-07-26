@@ -8,4 +8,8 @@ class TipoEspiral extends Model
 {
     protected $table = 'tipoespiral';
     public $timestamps = false;
+
+    public function colorespiral(){
+        return $this->hasMany('App\Models\ColorEspiral');
+    }
 }
