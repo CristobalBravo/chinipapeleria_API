@@ -23,6 +23,6 @@ class Pedido extends Model
     }
 
     public function detallePedido(){
-        return $this->hasmany('App\Models\EstadoPedido');
+        return $this->hasmany('App\Models\DetallePedido');
     }
 }

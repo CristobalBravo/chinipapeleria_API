@@ -82,3 +82,9 @@ Route::post('pedido/crear','PedidoController@crear');
 Route::post('pedido/editar','PedidoController@editar');
 Route::post('pedido/eliminar','PedidoController@eliminar');
 
+//producto
+Route::post('producto/all','ProductoController@all');
+Route::post('producto/buscar','ProductoController@buscarPorID');
+Route::post('producto/crear','ProductoController@crear');
+Route::post('producto/editar','ProductoController@editar');
+Route::post('producto/eliminar','ProductoController@eliminar');

@@ -8,4 +8,8 @@ class TipoProducto extends Model
 {
     protected $table = 'tipoproducto';
     public $timestamps=false;
+
+    public function producto(){
+        return $this->hasMany('App\Models\Producto');
+    }
 }

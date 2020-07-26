@@ -8,4 +8,8 @@ class Marca extends Model
 {
     protected $table = 'marca';
     public $timestamps= false;
+
+    public function producto(){
+        return $this->hasMany('App\Models\Producto');
+    }
 }
