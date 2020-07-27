@@ -66,7 +66,7 @@ class DetallePedidoController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id del producto para editar";
+            $result->message = "Debes seleccionar un id del Detalle de pedido para editar";
             return response()->json($result);
         }
 
@@ -85,7 +85,7 @@ class DetallePedidoController extends Controller
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
-            $result->message='No se encontro el id del  producto';
+            $result->message='No se encontro el id del Detalle de pedido';
         }
 
         return response()->json($result);
@@ -99,17 +99,17 @@ class DetallePedidoController extends Controller
         if($request->id == ''){
             $result->code = 400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id del producto para Eliminar";
+            $result->message = "Debes seleccionar un id del detalle de pedido para Eliminar";
             return response()->json($result);
         }
 
         try{
             $id = $request->id;
-            $producto = DetallePedido::findOrFail($id);
-            $producto->delete();
+            $detallePedido = DetallePedido::findOrFail($id);
+            $detallePedido->delete();
             $result->code = 200;
             $result->status='success';
-            $result->message='Producto Eliminado Exitosamente';
+            $result->message='Detalle de Pedido Eliminado Exitosamente';
         }catch(ModelNotFoundException $e){
             $result->code = 400;
             $result->status='error';

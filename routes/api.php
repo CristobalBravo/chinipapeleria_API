@@ -150,3 +150,11 @@ Route::post('tipoPunta/buscar','tipoPuntaController@buscarPorID');
 Route::post('tipoPunta/crear','tipoPuntaController@crear');
 Route::post('tipoPunta/editar','tipoPuntaController@editar');
 Route::post('tipoPunta/eliminar','tipoPuntaController@eliminar');
+
+
+//Tamaño FlashCard
+Route::post('flashCard/all','FlashCardController@all');
+Route::post('flashCard/buscar','FlashCardController@buscarPorID');
+Route::post('flashCard/crear','FlashCardController@crear');
+Route::post('flashCard/editar','FlashCardController@editar');
+Route::post('flashCard/eliminar','FlashCardController@eliminar');
