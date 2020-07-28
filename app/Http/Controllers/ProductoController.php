@@ -10,7 +10,7 @@ use DateTime;
 class ProductoController extends Controller
 {
     public function all(){
-        $producto= Producto::all()->load('categoria', 'tipoProducto');
+        $producto= Producto::all()->load('categoria', 'marca');
         $data=[
             'code'=>200,
             'status'=>'success',
@@ -33,7 +33,7 @@ class ProductoController extends Controller
 
         try{
             $id = $request->id;
-            $producto = Producto::findOrFail($id)->load('categoria', 'tipoProducto');
+            $producto = Producto::findOrFail($id)->load('categoria', 'marca');
             $result->code = 200;
             $result->status='success';
             $result->producto=$producto;
@@ -51,7 +51,7 @@ class ProductoController extends Controller
         $producto->nombre = $request->nombre;
         $producto->precio=$request->precio;
         $producto->stock=$request->stock;
-        $producto->TipoProducto_id=$request->TipoProducto_id;
+        //$producto->TipoProducto_id=$request->TipoProducto_id;
         $producto->Categoria_id=$request->Categoria_id;
         $producto->Marca_id=$request->Marca_id;
         $producto->save();

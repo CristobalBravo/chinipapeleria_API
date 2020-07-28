@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2020 a las 02:46:52
+-- Tiempo de generación: 28-07-2020 a las 04:55:03
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -34,7 +34,7 @@ CREATE TABLE `agenda` (
   `TamanioHoja_id` int(11) NOT NULL,
   `TipoHoja_id` int(11) NOT NULL,
   `TipoTapa_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,7 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE `colorespiral` (
   `colorrgb` varchar(8) NOT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT 1,
   `TipoEspiral_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE `colorespiral` (
 CREATE TABLE `confagendadiseno` (
   `ConfiguracionAgenda_id` int(11) NOT NULL,
   `Diseno_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE `configuracionagenda` (
   `costo_extra` int(11) DEFAULT NULL,
   `DetallePedido_id` int(11) NOT NULL,
   `ColorEspiral_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ CREATE TABLE `configuracioncuaderno` (
   `TipoTapa_id` int(11) NOT NULL,
   `TamanioHoja_id` int(11) NOT NULL,
   `ColorEspiral_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,7 @@ CREATE TABLE `configuracionflashcard` (
   `FlashCard_id` int(11) NOT NULL,
   `Diseno_id` int(11) NOT NULL,
   `TipoFlashCard_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE `configuracionplanificador` (
   `Planificador_id` int(11) NOT NULL,
   `DetallePedido_id` int(11) NOT NULL,
   `TipoPlanificador_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -143,7 +143,7 @@ CREATE TABLE `configuracionplanificador` (
 CREATE TABLE `cuaderno` (
   `id` int(11) NOT NULL,
   `Producto_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -157,7 +157,7 @@ CREATE TABLE `detallepedido` (
   `precio` varchar(45) DEFAULT NULL,
   `Pedido_id` int(11) NOT NULL,
   `Producto_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,7 @@ CREATE TABLE `diseno` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `path` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -181,7 +181,7 @@ CREATE TABLE `estadopedido` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -197,7 +197,7 @@ CREATE TABLE `flashcard` (
   `largo` int(11) NOT NULL,
   `unidad_medida` varchar(15) NOT NULL,
   `Producto_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -212,7 +212,7 @@ CREATE TABLE `lapiz` (
   `descripcion` varchar(255) DEFAULT NULL,
   `Producto_id` int(11) NOT NULL,
   `TipoPunta_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -224,7 +224,7 @@ CREATE TABLE `marca` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -236,7 +236,7 @@ CREATE TABLE `mediopago` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -249,9 +249,9 @@ CREATE TABLE `pedido` (
   `fecha_creacion` date DEFAULT NULL,
   `fecha_termino` date DEFAULT NULL,
   `Usuario_id` int(11) NOT NULL,
-  `Venta_id` int(11) NOT NULL,
+  `Venta_id` int(11) DEFAULT NULL,
   `EstadoPedido_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -267,7 +267,7 @@ CREATE TABLE `planificador` (
   `TamanioHoja_id` int(11) NOT NULL,
   `TipoTapa_id` int(11) NOT NULL,
   `ColorEspiral_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -280,10 +280,10 @@ CREATE TABLE `producto` (
   `nombre` varchar(45) NOT NULL,
   `precio` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
-  `TipoProducto_id` int(11) NOT NULL,
+  `imagen` varchar(45) NOT NULL,
   `Categoria_id` int(11) NOT NULL,
   `Marca_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -295,7 +295,7 @@ CREATE TABLE `seccion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -306,7 +306,7 @@ CREATE TABLE `seccion` (
 CREATE TABLE `seccionagenda` (
   `Seccion_id` int(11) NOT NULL,
   `Agenda_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -320,7 +320,7 @@ CREATE TABLE `tamaniohoja` (
   `ancho` float NOT NULL,
   `largo` float NOT NULL,
   `unidad_medida` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -332,7 +332,7 @@ CREATE TABLE `tipoespiral` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -344,7 +344,7 @@ CREATE TABLE `tipohoja` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `gramaje` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -356,7 +356,7 @@ CREATE TABLE `tipolinea` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -368,18 +368,7 @@ CREATE TABLE `tipoplanificador` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tipoproducto`
---
-
-CREATE TABLE `tipoproducto` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -391,7 +380,7 @@ CREATE TABLE `tipopunta` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -402,7 +391,7 @@ CREATE TABLE `tipopunta` (
 CREATE TABLE `tipotapa` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -419,8 +408,11 @@ CREATE TABLE `usuario` (
   `email` varchar(45) DEFAULT NULL,
   `numero` varchar(45) DEFAULT NULL,
   `ciudad` varchar(45) DEFAULT NULL,
-  `calle` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `calle` varchar(45) DEFAULT NULL,
+  `password` varchar(45) NOT NULL,
+  `remember_token` varchar(45) NOT NULL,
+  `role` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -432,7 +424,7 @@ CREATE TABLE `venta` (
   `id` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `MedioPago_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tablas volcadas
@@ -587,7 +579,6 @@ ALTER TABLE `planificador`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Producto_TipoProducto1_idx` (`TipoProducto_id`),
   ADD KEY `fk_Producto_Categoria1_idx` (`Categoria_id`),
   ADD KEY `fk_Producto_Marca1_idx` (`Marca_id`);
 
@@ -632,12 +623,6 @@ ALTER TABLE `tipolinea`
 -- Indices de la tabla `tipoplanificador`
 --
 ALTER TABLE `tipoplanificador`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `tipoproducto`
---
-ALTER TABLE `tipoproducto`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -790,12 +775,6 @@ ALTER TABLE `tipoplanificador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tipoproducto`
---
-ALTER TABLE `tipoproducto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `tipopunta`
 --
 ALTER TABLE `tipopunta`
@@ -930,8 +909,7 @@ ALTER TABLE `planificador`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `fk_Producto_Categoria1` FOREIGN KEY (`Categoria_id`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Producto_Marca1` FOREIGN KEY (`Marca_id`) REFERENCES `marca` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Producto_TipoProducto1` FOREIGN KEY (`TipoProducto_id`) REFERENCES `tipoproducto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Producto_Marca1` FOREIGN KEY (`Marca_id`) REFERENCES `marca` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `seccionagenda`
