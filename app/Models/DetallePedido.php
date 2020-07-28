@@ -12,8 +12,13 @@ class DetallePedido extends Model
    public function pedido(){
         return $this->belongsTo('App\Models\Pedido', 'Pedido_id');
    }
+
    public function producto(){
     return $this->belongsTo('App\Models\Producto', 'Producto_id');
-    }
+   }
+
+   public function configuracionFlashCard(){
+    return $this->hasMany('App\Models\ConfiguracionFlashCard');
+   }
 
 }

@@ -158,3 +158,10 @@ Route::post('flashCard/buscar','FlashCardController@buscarPorID');
 Route::post('flashCard/crear','FlashCardController@crear');
 Route::post('flashCard/editar','FlashCardController@editar');
 Route::post('flashCard/eliminar','FlashCardController@eliminar');
+
+//Tamaño Configuracion Flash Card
+Route::post('configuracionFlashCard/all','configuracionFlashCardController@all');
+Route::post('configuracionFlashCard/buscar','configuracionFlashCardController@buscarPorID');
+Route::post('configuracionFlashCard/crear','configuracionFlashCardController@crear');
+Route::post('configuracionFlashCard/editar','configuracionFlashCardController@editar');
+Route::post('configuracionFlashCard/eliminar','configuracionFlashCardController@eliminar');

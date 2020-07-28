@@ -25,7 +25,7 @@ class FlashCardController extends Controller
         if($request->id == ''){
             $result->code=400;
             $result->status='error';
-            $result->message = "Debes seleccionar un id del Flash Card pedido para buscar";
+            $result->message = "Debes seleccionar un id del Flash Card para buscar";
             return response()->json($result);
         }
 
@@ -94,7 +94,7 @@ class FlashCardController extends Controller
 
         if($request->id == ''){
             $result->code=400;
-            $result->message = "Debes seleccionar un id del Flash Card de pedido para editar";
+            $result->message = "Debes seleccionar un id del Flash Card para editar";
             return response()->json($result);
         }
 
@@ -115,7 +115,7 @@ class FlashCardController extends Controller
         }catch(ModelNotFoundException $e){
             $result->code =400;
             $result->status='error';
-            $result->message='No se encontro el id de la Flash Card de pedido';
+            $result->message='No se encontro el id de la Flash Card ';
         }
 
         return response()->json($result);
