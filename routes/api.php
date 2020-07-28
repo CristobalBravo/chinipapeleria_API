@@ -19,9 +19,11 @@ use App\Models\Usuario;
 //Usuario
 Route::post('usuario/all','UsuarioController@all');
 Route::post('usuario/buscar','UsuarioController@buscarPorID');
-Route::post('usuario/crear','UsuarioController@crear');
-Route::post('usuario/editar','UsuarioController@editar');
+Route::post('usuario/registrar','UsuarioController@registrar');
+//Route::post('usuario/editar','UsuarioController@editar');
 Route::post('usuario/eliminar','UsuarioController@eliminar');
+Route::post('usuario/login','UsuarioController@login');
+Route::post('usuario/update','UsuarioController@update');
 
 
 //medio de pago

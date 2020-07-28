@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\User;
+use App\Helpers\JwtAuth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
     public function all(){
-        $usuario= Usuario::all();
+        $usuario= User::all();
         $data=[
             'code'=>200,
             'status'=> 'success',
@@ -31,7 +33,7 @@ class UsuarioController extends Controller
 
         try{
             $id = $request->id;
-            $usuario = Usuario::findOrFail($id);
+            $usuario = User::findOrFail($id);
             $result->code = 200;
             $result->status='success';
             $result->usuario=$usuario;
@@ -44,21 +46,54 @@ class UsuarioController extends Controller
         return response()->json($result);
     }
 
-    Public function crear(Request $request){
-        $usuario = new Usuario();
-        $usuario->nombre = $request->nombre;
-        $usuario->apellido = $request->apellido;
-        $usuario->rut = $request->rut;
-        $usuario->codigo_verificacion = $request->codigo_verificacion;
-        $usuario->email = $request->email;
-        $usuario->numero = $request->numero;
-        $usuario->ciudad = $request->ciudad;
-        $usuario->calle = $request->calle;
-        $usuario->save();
-        $data=[
-            'code'=>200,
-            'status'=> 'success',
-            'usuario'=>$usuario];
+    Public function registrar(Request $request){
+
+        //validacion
+        if(!empty($request->all())){
+            $validate = Validator::make($request->all(),[
+                'nombre'=>'required',
+                'apellido'=>'required',
+                'rut'=>'required|unique:usuario',
+                'codigo_verificacion'=>'required',
+                'password'=>'required',
+                'email'=>'required|email']);
+            if ($validate->fails()){
+                $data=[
+                    'code'=>400,
+                    'status'=> 'error',
+                    'mensaje'=>'El usuario no ha podido Crearse',
+                    'errores'=>$validate->errors()];
+            }else{
+
+                $usuario = new User();
+
+                $usuario->nombre = $request->nombre;
+                $usuario->apellido = $request->apellido;
+                $usuario->rut = $request->rut;
+                $usuario->codigo_verificacion = $request->codigo_verificacion;
+                $usuario->email = $request->email;
+                $usuario->numero = $request->numero;
+                $usuario->ciudad = $request->ciudad;
+                $usuario->calle = $request->calle;
+                //cifrado de password
+                $pwd = hash('sha256',$request->password);
+
+                $usuario->password= $pwd;
+                $usuario->role='ROLE_USER';
+                $usuario->save();
+                $data=[
+                    'code'=>200,
+                    'status'=> 'success',
+                    'mensaje'=>'el usuario se ha creado correctamente',
+                    'usuario'=>$usuario];
+            }
+        }else{
+            $data=[
+                'code'=>200,
+                'status'=> 'error',
+                'mensaje'=>'No ha ingresado los parametros correcto'];
+        }
+
         return response()->json($data);
     }
 
@@ -74,7 +109,7 @@ class UsuarioController extends Controller
         }
 
         try{
-            $usuario = Usuario::findOrFail($request->id);
+            $usuario = User::findOrFail($request->id);
             $usuario->nombre = $request->nombre;
             $usuario->apellido = $request->apellido;
             $usuario->rut = $request->rut;
@@ -111,7 +146,7 @@ class UsuarioController extends Controller
 
         try{
             $id = $request->id;
-            $usuario = Usuario::findOrFail($id);
+            $usuario = User::findOrFail($id);
             $usuario->delete();
             $result->code = 200;
             $result->status='success';
@@ -123,5 +158,65 @@ class UsuarioController extends Controller
         }
 
         return response()->json($result);
+    }
+
+    public function login(Request $request){
+
+        $jwtAuth = new JwtAuth();
+
+        $validate = Validator::make($request->all(),[
+            'password'=>'required',
+            'email'=>'required|email']);
+        if ($validate->fails()){
+            $data=[
+                'code'=>400,
+                'status'=> 'error',
+                'mensaje'=>'El usuario no ha podido identificarse',
+                'errores'=>$validate->errors()];
+        }else{
+            $pwd =hash('sha256',$request->password);
+            $email=$request->email;
+            $data=$jwtAuth->signup($email,$pwd);
+            if(!empty($request->gettoken)){
+                $data= $jwtAuth->signup($email,$pwd,true);
+            }
+
+        }
+        return response()->json($data);
+
+    }
+
+    public function update( Request $request){
+        $token = $request->header('Authorization');
+        $jwtAuth = new JwtAuth();
+        $checktoken= $jwtAuth->checkToken($token);
+        if($checktoken && !empty($request->all())){
+            $user= $jwtAuth->checkToken($token,true);
+            $validate = Validator::make($request->all(),[
+                'nombre'=>'required',
+                'apellido'=>'required',
+                'rut'=>'required|unique:usuario',
+                'codigo_verificacion'=>'required',
+                'password'=>'required',
+                'email'=>'required|email'.$user->sub]);
+
+                unset($request->id);
+                unset($request->role);
+                unset($request->remenber_token);
+                unset($request->password);
+                $user_update = User::Where('id',$user->sub)->update($request->all());
+                $data=[
+                    'code'=>200,
+                    'status'=> 'success',
+                    'usuario'=>'El usuario a sido actualizado'];
+
+        }else{
+            $data=[
+                'code'=>400,
+                'status'=> 'error',
+                'mensaje'=>'El usuario no ha podido identificarse'];
+        }
+
+        return response()->json($data);
     }
 }

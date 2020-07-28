@@ -11,7 +11,7 @@ class Pedido extends Model
     public $timestamps=false;
 
     public function usuario(){
-        return $this->belongsTo('App\Models\Usuario','Usuario_id');
+        return $this->belongsTo('App\Models\User','Usuario_id');
     }
 
     public function venta(){

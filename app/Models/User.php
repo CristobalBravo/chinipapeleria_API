@@ -12,7 +12,6 @@ class User extends Authenticatable
     protected $table = 'usuario';
     public $timestamps=false;
 
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -21,7 +20,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
 
     public function pedido(){
         return $this->hasMany('App\Models\Pedido');
