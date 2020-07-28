@@ -130,21 +130,21 @@ Route::post('tamanioHoja/crear','tamanioHojaController@crear');
 Route::post('tamanioHoja/editar','tamanioHojaController@editar');
 Route::post('tamanioHoja/eliminar','tamanioHojaController@eliminar');
 
-//Tamaño Hoja
+//Tipo Hoja
 Route::post('tipoHoja/all','tipoHojaController@all');
 Route::post('tipoHoja/buscar','tipoHojaController@buscarPorID');
 Route::post('tipoHoja/crear','tipoHojaController@crear');
 Route::post('tipoHoja/editar','tipoHojaController@editar');
 Route::post('tipoHoja/eliminar','tipoHojaController@eliminar');
 
-//Tamaño TipoLinea
+//TipoLinea
 Route::post('tipoLinea/all','tipoLineaController@all');
 Route::post('tipoLinea/buscar','tipoLineaController@buscarPorID');
 Route::post('tipoLinea/crear','tipoLineaController@crear');
 Route::post('tipoLinea/editar','tipoLineaController@editar');
 Route::post('tipoLinea/eliminar','tipoLineaController@eliminar');
 
-//Tamaño TipoPunta
+//TipoPunta
 Route::post('tipoPunta/all','tipoPuntaController@all');
 Route::post('tipoPunta/buscar','tipoPuntaController@buscarPorID');
 Route::post('tipoPunta/crear','tipoPuntaController@crear');
@@ -165,3 +165,16 @@ Route::post('configuracionFlashCard/buscar','configuracionFlashCardController@bu
 Route::post('configuracionFlashCard/crear','configuracionFlashCardController@crear');
 Route::post('configuracionFlashCard/editar','configuracionFlashCardController@editar');
 Route::post('configuracionFlashCard/eliminar','configuracionFlashCardController@eliminar');
+//Lapiz
+Route::post('lapiz/all','lapizController@all');
+Route::post('lapiz/buscar','lapizController@buscarPorID');
+Route::post('lapiz/crear','lapizController@crear');
+Route::post('lapiz/editar','lapizController@editar');
+Route::post('lapiz/eliminar','lapizController@eliminar');
+
+//ColorEspiral
+Route::post('colorEspiral/all','colorEspiralController@all');
+Route::post('colorEspiral/buscar','colorEspiralController@buscarPorID');
+Route::post('colorEspiral/crear','colorEspiralController@crear');
+Route::post('colorEspiral/editar','colorEspiralController@editar');
+Route::post('colorEspiral/eliminar','colorEspiralController@eliminar');

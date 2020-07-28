@@ -28,4 +28,7 @@ class Producto extends Model
     public function flashCard(){
         return $this->hasOne('App\Models\FlashCard');
     }
+    public function lapiz(){
+        return $this->hasOne('App\Models\Lapiz');
+    }
 }
