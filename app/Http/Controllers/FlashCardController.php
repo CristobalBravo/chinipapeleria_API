@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class FlashCardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth', ['except'=>['all']]);
+    }
+
     public function all(){
         $flashCard=FlashCard::all()->load('producto');
         $data=[

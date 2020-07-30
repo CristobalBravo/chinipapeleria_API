@@ -24,9 +24,9 @@ class ApiAuthMiddleware
             return $next($request);
         }else{
             $data=[
-                'code'=>200,
+                'code'=>400,
                 'status'=> 'error',
-                'mensaje'=>'No ha ingresado los parametros correcto'];
+                'mensaje'=>'El Usuario No Esta Identificado'];
             return response()->json($data);
         }
 

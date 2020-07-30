@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LapizController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
+
     public function all(){
         $lapiz = Lapiz::all()->load('producto','tipopunta');
         $data=[

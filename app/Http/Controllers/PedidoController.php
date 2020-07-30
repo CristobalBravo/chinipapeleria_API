@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Helpers\JwtAuth;
 use App\Models\Pedido;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -9,6 +11,10 @@ use DateInterval;
 
 class PedidoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
     public function all(){
         $pedido = Pedido::all()->load('usuario','estadoPedido');
         $data=[
@@ -47,18 +53,24 @@ class PedidoController extends Controller
     }
 
     Public function crear(Request $request){
-        $now= new DateTime('now');
-        $pedido = new Pedido();
-        $pedido->fecha_creacion = $now->format('Y-m-d H:i:s');
-        $pedido->fecha_termino = $now->add(new DateInterval('P7D'))->format('Y-m-d H:i:s');
-        $pedido->Usuario_id=$request->Usuario_id;
-        $pedido->EstadoPedido_id=$request->EstadoPedido_id;
-        $pedido->save();
-        $data=[
-            'code'=>200,
-            'status'=> 'success',
-            'pedido'=>$pedido];
+
+            $jwt = new JwtAuth();
+            $token=$request->header('Authorization',null);
+            $user=$jwt->checkToken($token,true);
+            $now= new DateTime('now');
+            $pedido = new Pedido();
+            $pedido->fecha_creacion = $now->format('Y-m-d H:i:s');
+            $pedido->fecha_termino = $now->add(new DateInterval('P7D'))->format('Y-m-d H:i:s');
+            $pedido->Usuario_id=$user->sub;
+            $pedido->EstadoPedido_id=1;
+            $pedido->save();
+            $data=[
+                'code'=>200,
+                'status'=> 'success',
+                'pedido'=>$pedido];
         return response()->json($data);
+
+
     }
 
 

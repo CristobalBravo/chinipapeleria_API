@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ConfiguracionFlashCardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
+
     public function all(){
         $configuracionFlashCard=ConfiguracionFlashCard::all()->load('diseño','tipoLinea');
         $data=[

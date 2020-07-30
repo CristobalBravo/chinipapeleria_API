@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TipoLineaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth',['except'=>['all']]);
+    }
+
     public function all(){
         $tipolinea= TipoLinea::all();
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'usuario'=>$tipolinea];
+            'tipo Linea'=>$tipolinea];
         return response()->json($data);
     }
 

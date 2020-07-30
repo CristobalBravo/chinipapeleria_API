@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-07-2020 a las 04:55:03
+-- Tiempo de generación: 30-07-2020 a las 22:55:45
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -183,6 +183,16 @@ CREATE TABLE `estadopedido` (
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `estadopedido`
+--
+
+INSERT INTO `estadopedido` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Recibido', 'El Pedido Ha sido Recibido por tu ChiniAdministrador'),
+(2, 'Diseñando', 'El Pedido se esta administrando por tu ChiniAdministrador'),
+(3, 'En Transito', 'El Pedido se ha enviado a tu Direccion'),
+(4, 'Finalizado', 'El Pedido ha sido recibido por nuestro chinicliente');
+
 -- --------------------------------------------------------
 
 --
@@ -211,7 +221,7 @@ CREATE TABLE `lapiz` (
   `color_rgb` varchar(8) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `Producto_id` int(11) NOT NULL,
-  `TipoPunta_id` int(11) NOT NULL
+  `TipoPunta_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -253,6 +263,13 @@ CREATE TABLE `pedido` (
   `EstadoPedido_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `fecha_creacion`, `fecha_termino`, `Usuario_id`, `Venta_id`, `EstadoPedido_id`) VALUES
+(1, '2020-07-30', '2020-08-06', 1, NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -280,7 +297,7 @@ CREATE TABLE `producto` (
   `nombre` varchar(45) NOT NULL,
   `precio` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
-  `imagen` varchar(45) NOT NULL,
+  `img` varchar(45) DEFAULT NULL,
   `Categoria_id` int(11) NOT NULL,
   `Marca_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -402,17 +419,24 @@ CREATE TABLE `tipotapa` (
 CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) DEFAULT NULL,
-  `rut` varchar(45) DEFAULT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `rut` varchar(45) NOT NULL,
   `codigo_verificacion` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
+  `email` varchar(45) NOT NULL,
   `numero` varchar(45) DEFAULT NULL,
   `ciudad` varchar(45) DEFAULT NULL,
   `calle` varchar(45) DEFAULT NULL,
-  `password` varchar(45) NOT NULL,
-  `remember_token` varchar(45) NOT NULL,
-  `role` varchar(45) NOT NULL
+  `password` varchar(256) NOT NULL,
+  `remenber_token` varchar(256) DEFAULT NULL,
+  `role` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `rut`, `codigo_verificacion`, `email`, `numero`, `ciudad`, `calle`, `password`, `remenber_token`, `role`) VALUES
+(1, 'Felipe', 'Alarcon', '19168969', '0', 'felipe@gmail.com', '987845636', 'san carlos', 'san carlos 123', '796891a5852988df8332a2918289c7190ecbb8b59374661116663be07aae3697', NULL, 'ROLE_USER');
 
 -- --------------------------------------------------------
 
@@ -679,9 +703,21 @@ ALTER TABLE `configuracionagenda`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `configuracioncuaderno`
+--
+ALTER TABLE `configuracioncuaderno`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `configuracionflashcard`
 --
 ALTER TABLE `configuracionflashcard`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `configuracionplanificador`
+--
+ALTER TABLE `configuracionplanificador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -706,7 +742,7 @@ ALTER TABLE `diseno`
 -- AUTO_INCREMENT de la tabla `estadopedido`
 --
 ALTER TABLE `estadopedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `flashcard`
@@ -736,12 +772,24 @@ ALTER TABLE `mediopago`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `planificador`
+--
+ALTER TABLE `planificador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `seccion`
+--
+ALTER TABLE `seccion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -790,7 +838,7 @@ ALTER TABLE `tipotapa`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`

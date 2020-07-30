@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DisenoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('api.auth', ['except'=>['all']]);
+    }
     public function all(){
         $diseno= Diseno::all();
         $data=[
@@ -15,7 +20,7 @@ class DisenoController extends Controller
             'status'=> 'success',
             'medioPago'=>$diseno];
         return response()->json($data);
-    } 
+    }
 
     public function buscarPorID(Request $request){
         $result = new \stdClass();

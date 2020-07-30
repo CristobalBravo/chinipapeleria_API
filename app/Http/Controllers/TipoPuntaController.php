@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TipoPuntaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('api.auth',['except'=>['all']]);
+    }
     public function all(){
         $tipopunta= TipoPunta::all();
         $data=[
