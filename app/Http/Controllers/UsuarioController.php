@@ -5,17 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Helpers\JwtAuth;
+use App\Helpers\Role;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
-    public function all(){
-        $usuario= User::all();
-        $data=[
+    public function all(Request $request){
+        $token = $request->header('Authorization');
+        $role= new Role();
+        if($role->admin($token)){
+            $usuario= User::all();
+            $data=[
             'code'=>200,
             'status'=> 'success',
             'usuario'=>$usuario];
+        return response()->json($data);
+        }
+
+        $data=[
+            'code'=>400,
+            'status'=> 'error',
+            'mensaje'=>'el usuario no es administrador'];
         return response()->json($data);
     }
 

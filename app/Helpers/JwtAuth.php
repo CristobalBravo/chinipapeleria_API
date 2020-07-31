@@ -29,6 +29,7 @@ class JwtAuth{
                 'email'=>$user->email,
                 'nombre'=>$user->nombre,
                 'apellido'=>$user->apellido,
+                'role'=>$user->role,
                 'iat'=>time(),
                 'exp'=>time()+(7*24*60*60)
             );
@@ -43,7 +44,7 @@ class JwtAuth{
         }else{
             $data =array(
                 'status'=>'error',
-                'message'=>'loggin incorrecto'
+                'message'=>'login incorrecto'
             );
         }
 

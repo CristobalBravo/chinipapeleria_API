@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Helpers\Role;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -47,18 +47,28 @@ class ProductoController extends Controller
     }
 
     Public function crear(Request $request){
-        $producto = new Producto();
-        $producto->nombre = $request->nombre;
-        $producto->precio=$request->precio;
-        $producto->stock=$request->stock;
-        //$producto->TipoProducto_id=$request->TipoProducto_id;
-        $producto->Categoria_id=$request->Categoria_id;
-        $producto->Marca_id=$request->Marca_id;
-        $producto->save();
+
+        $token = $request->header('Authorization');
+        $role= new Role();
+        if($role->admin($token)){
+            $producto = new Producto();
+            $producto->nombre = $request->nombre;
+            $producto->precio=$request->precio;
+            $producto->stock=$request->stock;
+            //$producto->TipoProducto_id=$request->TipoProducto_id;
+            $producto->Categoria_id=$request->Categoria_id;
+            $producto->Marca_id=$request->Marca_id;
+            $producto->save();
+            $data=[
+                'code'=>200,
+                'status'=> 'success',
+                'Producto'=>$producto];
+            return response()->json($data);
+        }
         $data=[
-            'code'=>200,
-            'status'=> 'success',
-            'Producto'=>$producto];
+            'code'=>400,
+            'status'=> 'error',
+            'mensaje'=>'el usuario no es administrador'];
         return response()->json($data);
     }
 

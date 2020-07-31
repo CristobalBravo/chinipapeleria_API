@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DetallePedidoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
+
     public function all(){
         $detallePedido = DetallePedido::all()->load('pedido','producto');
         $data=[
