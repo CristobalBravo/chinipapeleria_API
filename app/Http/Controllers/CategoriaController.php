@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoriaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
     public function all(){
         $categoria= Categoria::all();
         $data=[

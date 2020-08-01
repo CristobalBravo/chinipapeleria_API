@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MarcaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('api.auth');
+    }
     public function all(){
         $marca= Marca::all();
         $data=[
