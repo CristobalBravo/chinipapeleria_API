@@ -9,6 +9,7 @@ use DateTime;
 
 class ProductoController extends Controller
 {
+
     public function all(){
         $producto= Producto::all()->load('categoria', 'marca');
         $data=[
@@ -55,6 +56,7 @@ class ProductoController extends Controller
             $producto->nombre = $request->nombre;
             $producto->precio=$request->precio;
             $producto->stock=$request->stock;
+            $producto->img=$request->img;
             //$producto->TipoProducto_id=$request->TipoProducto_id;
             $producto->Categoria_id=$request->Categoria_id;
             $producto->Marca_id=$request->Marca_id;
