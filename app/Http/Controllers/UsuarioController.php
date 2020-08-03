@@ -8,9 +8,15 @@ use App\Helpers\JwtAuth;
 use App\Helpers\Role;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth',['except'=>['registrar','login']]);
+    }
+
     public function all(Request $request){
         $token = $request->header('Authorization');
         $role= new Role();
@@ -228,6 +234,18 @@ class UsuarioController extends Controller
                 'mensaje'=>'El usuario no ha podido identificarse'];
         }
 
+        return response()->json($data);
+    }
+
+    public function allDetallePedido(Request $request){
+        $token = $request->header('Authorization');
+        $jwtAuth = new JwtAuth();
+        $user= $jwtAuth->checkToken($token,true);
+        $detallePedido=DB::select('select * from detallepedido where Pedido_id in (select id from pedido where Usuario_id= ?)', [$user->sub]);
+        $data=[
+            'code'=>200,
+            'status'=> 'success',
+            'detallePedido'=>$detallePedido];
         return response()->json($data);
     }
 }

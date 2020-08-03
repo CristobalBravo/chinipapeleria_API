@@ -61,7 +61,7 @@ class DetallePedidoController extends Controller
         $data=[
             'code'=>200,
             'status'=> 'success',
-            'Detalle Pedido'=>$detallePedido];
+            'detallePedido'=>$detallePedido];
         return response()->json($data);
     }
 

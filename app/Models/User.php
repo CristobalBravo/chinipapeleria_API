@@ -22,6 +22,6 @@ class User extends Authenticatable
     ];
 
     public function pedido(){
-        return $this->hasMany('App\Models\Pedido');
+        return $this->hasMany('App\Models\Pedido','Usuario_id');
     }
 }
