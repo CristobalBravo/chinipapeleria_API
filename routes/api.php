@@ -25,6 +25,7 @@ Route::post('usuario/eliminar','UsuarioController@eliminar');
 Route::post('usuario/login','UsuarioController@login');
 Route::post('usuario/update','UsuarioController@update');
 Route::post('usuario/detallePedido','UsuarioController@allDetallePedido');
+Route::post('usuario/admin','UsuarioController@admin');
 
 
 //medio de pago

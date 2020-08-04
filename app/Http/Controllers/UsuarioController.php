@@ -248,4 +248,21 @@ class UsuarioController extends Controller
             'detallePedido'=>$detallePedido];
         return response()->json($data);
     }
+
+    public function admin(Request $request){
+        $token = $request->header('Authorization');
+        $role= new Role();
+        if($role->admin($token)){
+            $data=[
+            'code'=>200,
+            'status'=> 'success',
+            'mensaje'=>'El Usuario Es Administrador'];
+        return response()->json($data);
+        }
+        $data=[
+            'code'=>400,
+            'status'=> 'error',
+            'mensaje'=>'el usuario no es administrador'];
+        return response()->json($data);
+    }
 }
