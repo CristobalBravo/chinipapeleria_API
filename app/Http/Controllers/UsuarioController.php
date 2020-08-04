@@ -6,17 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Helpers\JwtAuth;
 use App\Helpers\Role;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('api.auth',['except'=>['registrar','login']]);
-    }
-
     public function all(Request $request){
         $token = $request->header('Authorization');
         $role= new Role();
@@ -93,9 +88,9 @@ class UsuarioController extends Controller
                 $usuario->ciudad = $request->ciudad;
                 $usuario->calle = $request->calle;
                 //cifrado de password
-                $pwd = hash('sha256',$request->password);
+                $pwd = Hash::make($request->password);
 
-                $usuario->password= $pwd;
+                $usuario->c= $pwd;
                 $usuario->role='ROLE_USER';
                 $usuario->save();
                 $data=[
@@ -184,6 +179,7 @@ class UsuarioController extends Controller
         $validate = Validator::make($request->all(),[
             'password'=>'required',
             'email'=>'required|email']);
+
         if ($validate->fails()){
             $data=[
                 'code'=>400,
@@ -191,8 +187,8 @@ class UsuarioController extends Controller
                 'mensaje'=>'El usuario no ha podido identificarse',
                 'errores'=>$validate->errors()];
         }else{
-            $pwd =hash('sha256',$request->password);
-            $email=$request->email;
+            $pwd = $request->password;
+            $email= $request->email;
             $data=$jwtAuth->signup($email,$pwd);
             if(!empty($request->gettoken)){
                 $data= $jwtAuth->signup($email,$pwd,true);
@@ -253,16 +249,8 @@ class UsuarioController extends Controller
         $token = $request->header('Authorization');
         $role= new Role();
         if($role->admin($token)){
-            $data=[
-            'code'=>200,
-            'status'=> 'success',
-            'mensaje'=>'El Usuario Es Administrador'];
-        return response()->json($data);
+        return response()->json(true);
         }
-        $data=[
-            'code'=>400,
-            'status'=> 'error',
-            'mensaje'=>'el usuario no es administrador'];
-        return response()->json($data);
+        return response()->json(false);
     }
 }

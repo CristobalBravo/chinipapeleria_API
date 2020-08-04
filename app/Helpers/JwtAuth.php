@@ -3,6 +3,7 @@
 namespace App\Helpers;
 use Firebase\JWT\JWT;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class JwtAuth{
@@ -13,14 +14,11 @@ class JwtAuth{
     }
     public function signup($email,$password, $getToken=null){
 
-        $user = User::where([
-            'email'=> $email,
-            'password'=>$password
-        ])->first();
+        $user = User::where('email', $email)->first();
 
-        $singup=false;
-        if (is_object($user)){
-            $singup=true;
+        $singup = false;
+        if (Hash::check($password, $user->password)){
+            $singup = true;
         }
 
         if ($singup){
@@ -37,9 +35,11 @@ class JwtAuth{
             $decode = JWT::decode($jwt,$this->key, ['HS256']);
 
             if(is_null($getToken)){
-                return $jwt;
+                $data =array('token' => $jwt);
+                return $data;
             }else{
-                return $decode;
+                $data =array('token' => $decode);
+                return $data;
             }
         }else{
             $data =array(
