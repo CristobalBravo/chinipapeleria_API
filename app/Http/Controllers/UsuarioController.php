@@ -91,7 +91,7 @@ class UsuarioController extends Controller
                 //cifrado de password
                 $pwd = Hash::make($request->password);
 
-                $usuario->c= $pwd;
+                $usuario->password= $pwd;
                 $usuario->role='ROLE_USER';
                 $usuario->save();
                 $data=[
