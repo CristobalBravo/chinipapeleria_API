@@ -84,18 +84,25 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Clone 
+## Instalacion 
 
-- Clone your project
-- Go to the folder application using cd command on your cmd or terminal
-- Run composer install on your cmd or terminal
-- Copy .env.example file to .env on the root folder. You can type copy .env.example .env if using command prompt Windows or cp .env.example .env if using terminal, Ubuntu
-- Open your .env file and change the database name (DB_DATABASE) to whatever you have, username (DB_USERNAME) and password (DB_PASSWORD) field correspond to your configuration.
-- By default, the username is root and you can leave the password field empty. (This is for Xampp)
-- By default, the username is root and password is also root. (This is for Lamp)
-- composer update
-- Run php artisan key:generate
-- Run php artisan migrate
+- Instalar Xampp https://www.apachefriends.org/es/download_success.html (Windows)
+- Instalar Composer https://getcomposer.org/download/ (Windows)
+- Clonar el proyecto
+- Abrir Xampp y activar Apache y Mysql(No debe tener otro servicio activo de MySql ya que genera conflicto con el puerto)
+- En Xampp apretar Admin o ir a la ruta http://localhost/phpmyadmin/
+- No colocar credenciales solo apretar continuar ya que por defecto no tiene clave
+- En el lado izquierdo click en "Nueva"
+- Colocar como nombre de la Base de Datos "chinipapeleria" y luego click en crear sin apretar nada mas adicional
+- Click en la Base de dato ya creada (chinipapeleria) e ir en la barra de navegacion a "SQL" y click en ella
+- En La Carpeta de Clonacion en la raiz del proyecto se encuentra la BDD "chinipapeleria.sql" abrir y copiar todo el scrip para copiarlo en SQL y apretar Continuar ya tendremos nuestra base de datos creada
+- No cerrar Xampp ya que este tiene el acceso a la base de datos
+- Abrir una consola de comando ubicarse en la raiz del proyecto y digitar composer install luego enter
+- Copiar el .env.example para crear el .env en la raiz del proyecto puedes escribir "copy .env.example .env" en la termina ubicada en la raiz del proyecto para que se copie automaticamente.
+- Abre el .env copiado y cambia el nombre de la base de datos (DB_DATABASE) a chinipapeleria, el usuario (DB_USERNAME) sera root y el password (DB_PASSWORD) quedara en blanco
+- Escribir el commando composer update
+- Escribir el commando php artisan key:generate
+- Escribir el comando php artisan storage:link
 - Run php artisan serve
-- Go to localhost:8000
+- Con eso bastara para que la API este corriendo sin problemas.
 
