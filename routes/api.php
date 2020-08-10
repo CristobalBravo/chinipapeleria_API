@@ -190,3 +190,18 @@ Route::post('agenda/crear','AgendaController@crear');
 Route::post('agenda/editar','AgendaController@editar');
 Route::post('agenda/eliminar','AgendaController@eliminar');
 
+
+//ConfiguracionPlanificador
+Route::post('configuracionplanificador/all','configuracionplanificadorController@all');
+Route::post('configuracionplanificador/buscar','configuracionplanificadorController@buscarPorID');
+Route::post('configuracionplanificador/crear','configuracionplanificadorController@crear');
+Route::post('configuracionplanificador/editar','configuracionplanificadorController@editar');
+Route::post('configuracionplanificador/eliminar','configuracionplanificadorController@eliminar');
+
+
+//Planificador
+Route::post('planificador/all','planificadorController@all');
+Route::post('planificador/buscar','planificadorController@buscarPorID');
+Route::post('planificador/crear','planificadorController@crear');
+Route::post('planificador/editar','planificadorController@editar');
+Route::post('planificador/eliminar','planificadorController@eliminar');
