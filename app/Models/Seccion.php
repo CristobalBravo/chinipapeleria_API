@@ -12,4 +12,8 @@ class Seccion extends Model
     public function seccionagenda(){
         return $this->hasMany('App\Models\SeccionAgenda');
     }
+
+    public function agendas(){
+        return $this->belongsToMany('App\Models\Agenda','seccionagenda', 'Seccion_id','Agenda_id',);
+    }
 }

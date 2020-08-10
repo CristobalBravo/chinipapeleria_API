@@ -182,3 +182,11 @@ Route::post('colorEspiral/buscar','colorEspiralController@buscarPorID');
 Route::post('colorEspiral/crear','colorEspiralController@crear');
 Route::post('colorEspiral/editar','colorEspiralController@editar');
 Route::post('colorEspiral/eliminar','colorEspiralController@eliminar');
+
+//agenda
+Route::post('agenda/all','AgendaController@all');
+Route::post('agenda/buscar','AgendaController@buscarPorID');
+Route::post('agenda/crear','AgendaController@crear');
+Route::post('agenda/editar','AgendaController@editar');
+Route::post('agenda/eliminar','AgendaController@eliminar');
+
