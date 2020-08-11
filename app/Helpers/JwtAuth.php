@@ -35,7 +35,7 @@ class JwtAuth{
             $decode = JWT::decode($jwt,$this->key, ['HS256']);
 
             if(is_null($getToken)){
-                $data =array('token' => $jwt);
+                $data =array('token' => $jwt, 'rol' => $user->role);
                 return $data;
             }else{
                 $data =array('token' => $decode);
