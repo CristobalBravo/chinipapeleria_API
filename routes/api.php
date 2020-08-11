@@ -212,3 +212,17 @@ Route::post('configuracionAgenda/buscar','configuracionAgendaController@buscarPo
 Route::post('configuracionAgenda/crear','configuracionAgendaController@crear');
 Route::post('configuracionAgenda/editar','configuracionAgendaController@editar');
 Route::post('configuracionAgenda/eliminar','configuracionAgendaController@eliminar');
+//ConfiguracionCuaderno
+Route::post('configuracioncuaderno/all','configuracioncuadernoController@all');
+Route::post('configuracioncuaderno/buscar','configuracioncuadernoController@buscarPorID');
+Route::post('configuracioncuaderno/crear','configuracioncuadernoController@crear');
+Route::post('configuracioncuaderno/editar','configuracioncuadernoController@editar');
+Route::post('configuracioncuaderno/eliminar','configuracioncuadernoController@eliminar');
+
+
+//Cuaderno
+Route::post('cuaderno/all','cuadernoController@all');
+Route::post('cuaderno/buscar','cuadernoController@buscarPorID');
+Route::post('cuaderno/crear','cuadernoController@crear');
+Route::post('cuaderno/editar','cuadernoController@editar');
+Route::post('cuaderno/eliminar','cuadernoController@eliminar');
