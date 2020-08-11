@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Helpers\Role;
+use App\Models\Cuaderno;
+use App\Models\FlashCard;
+use App\Models\Lapiz;
+use App\Models\Planificador;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Storage;
@@ -61,7 +65,20 @@ class ProductoController extends Controller
                 'stock' => 'bail|required|numeric',
                 'Categoria_id' => 'bail|required|numeric',
                 'Marca_id' => 'bail|required|numeric',
-                'img' => 'required|file|mimes:jpeg,bmp,png,jpg'
+                'TipoProducto_id' => 'bail|required|numeric',
+                'img' => 'required|file|mimes:jpeg,bmp,png,jpg',
+                'TipoPunta_id' => 'numeric',
+                'color' => 'string',
+                'colorrgb' => 'string',
+                'descripcion' => 'string',
+                'alto' => 'numeric',
+                'cantidad_hojas' => 'numeric',
+                'ancho' => 'numeric',
+                'unidad_medida' => 'string',
+                'TipoHoja_id' => 'numeric',
+                'TipoTapa_id' => 'numeric',
+                'ColorEspiral_id' => 'numeric',
+                'TamanioHoja_id' => 'numeric',
             ]);
 
             if ($validator->fails()) {
@@ -84,7 +101,95 @@ class ProductoController extends Controller
             //$producto->TipoProducto_id=$request->TipoProducto_id;
             $producto->Categoria_id=$request->Categoria_id;
             $producto->Marca_id=$request->Marca_id;
+            $producto->TipoProducto_id = $request->TipoProducto_id;
+
+            switch ($producto->TipoProducto_id) {
+                case Producto::LAPIZ:
+                    if (
+                        !isset($request->descripcion) || !isset($request->color)
+                        || !isset($request->colorrgb) || !isset($request->TipoPunta_id)
+                    ) {
+                        $resp = new \stdClass();
+                        $resp->code = 200;
+                        $resp->status = 'error';
+                        $resp->message = 'No cumple con las precondiciones de los campos';
+                        return response(json_encode($resp), 200)
+                        ->header('Content-Type', 'application/json');
+                    }
+                    break;
+                case Producto::CUADERNO:
+                    //No tiene caracteristicas no configurables
+                    break;
+                case Producto::PLANIFICADOR:
+                    if (!isset($request->cantidad_hojas) || !isset($request->TipoHoja_id)
+                        || !isset($request->TipoTapa_id) || !isset($request->ColorEspiral_id)
+                        || !isset($request->TamanioHoja_id)) {
+                        $resp = new \stdClass();
+                        $resp->code = 200;
+                        $resp->status = 'error';
+                        $resp->message = 'No cumple con las precondiciones de los campos';
+                        return response(json_encode($resp), 200)
+                            ->header('Content-Type', 'application/json');
+                    }
+                    break;
+                case Producto::AGENDA:
+                    break;
+                case Producto::FLASHCARD:
+                    if (!isset($request->descripcion) || !isset($request->ancho)
+                        || !isset($request->alto) || !isset($request->unidad_medida) || !isset($request->cantidad_hojas)) {
+                        $resp = new \stdClass();
+                        $resp->code = 200;
+                        $resp->status = 'error';
+                        $resp->message = 'No cumple con las precondiciones de los campos';
+                        return response(json_encode($resp), 200)
+                            ->header('Content-Type', 'application/json');
+                    }
+                    break;
+            }
+
+            //Se comprobo que los campos para la especificacion de cada producto estan
+            //se guarda el producto, para tener un id de producto
             $producto->save();
+
+            switch ($producto->TipoProducto_id) {
+                case Producto::LAPIZ:
+                    $lapiz = new Lapiz();
+                    $lapiz->color = $request->color;
+                    $lapiz->color_rgb = $request->colorrgb;
+                    $lapiz->descripcion = $request->descripcion;
+                    $lapiz->Producto_id = $producto->id;
+                    $lapiz->TipoPunta_id = $request->TipoPunta_id;
+                    $lapiz->save();
+                    break;
+                case Producto::CUADERNO:
+                    $cuaderno = new Cuaderno();
+                    $cuaderno->Producto_id = $producto->id;
+                    $cuaderno->save();
+                    break;
+                case Producto::PLANIFICADOR:
+                    $planificador = new Planificador();
+                    $planificador->Producto_id = $producto->id;
+                    $planificador->cantidad_hojas = $request->cantidad_hojas;
+                    $planificador->TamanioHoja_id = $request->TamanioHoja_id;
+                    $planificador->TipoTapa_id = $request->TipoTapa_id;
+                    $planificador->TipoHoja_id = $request->TipoHoja_id;
+                    $planificador->ColorEspiral_id = $request->ColorEspiral_id;
+                    $planificador->save();
+                    break;
+                case Producto::AGENDA:
+
+                    break;
+                case Producto::FLASHCARD:
+                    $flashcard = new FlashCard();
+                    $flashcard->Producto_id = $producto->id;
+                    $flashcard->descripcion = $request->descripcion;
+                    $flashcard->unidad_medida = $request->unidad_medida;
+                    $flashcard->cantidad_hojas = $request->cantidad_hojas;
+                    $flashcard->ancho = $request->ancho;
+                    $flashcard->largo = $request->alto;
+                    $flashcard->save();
+                    break;
+            }
 
             $resp = new \stdClass();
             $resp->code = 200;

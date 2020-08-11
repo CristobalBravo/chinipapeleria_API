@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
+    const LAPIZ = 1;
+    const CUADERNO = 2;
+    const AGENDA = 3;
+    const PLANIFICADOR = 4;
+    const FLASHCARD = 5;
+
     protected $table = 'producto';
     public $timestamps=false;
 
