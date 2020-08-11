@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-07-2020 a las 22:55:45
+-- Tiempo de generación: 11-08-2020 a las 08:35:32
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -36,6 +36,13 @@ CREATE TABLE `agenda` (
   `TipoTapa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `agenda`
+--
+
+INSERT INTO `agenda` (`id`, `cantidad_hojas`, `Producto_id`, `TamanioHoja_id`, `TipoHoja_id`, `TipoTapa_id`) VALUES
+(1, 100, 2, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +54,15 @@ CREATE TABLE `categoria` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Lápiz', 'Lápiz Tinta Gel'),
+(2, 'Flash Card', NULL),
+(3, 'Agenda', 'Agenda A Diseñar');
 
 -- --------------------------------------------------------
 
@@ -61,6 +77,13 @@ CREATE TABLE `colorespiral` (
   `estado` tinyint(1) NOT NULL DEFAULT 1,
   `TipoEspiral_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `colorespiral`
+--
+
+INSERT INTO `colorespiral` (`id`, `color`, `colorrgb`, `estado`, `TipoEspiral_id`) VALUES
+(1, 'rojo', '#cb3234', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -85,8 +108,17 @@ CREATE TABLE `configuracionagenda` (
   `observaciones` text DEFAULT NULL,
   `costo_extra` int(11) DEFAULT NULL,
   `DetallePedido_id` int(11) NOT NULL,
-  `ColorEspiral_id` int(11) NOT NULL
+  `ColorEspiral_id` int(11) NOT NULL,
+  `Agenda_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `configuracionagenda`
+--
+
+INSERT INTO `configuracionagenda` (`id`, `comentarios`, `observaciones`, `costo_extra`, `DetallePedido_id`, `ColorEspiral_id`, `Agenda_id`) VALUES
+(4, 'comentario de prueba', 'observaciones de prueba', 1500, 1, 1, 1),
+(5, 'comentario de prueba', 'observaciones de prueba', 1500, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -159,6 +191,13 @@ CREATE TABLE `detallepedido` (
   `Producto_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `detallepedido`
+--
+
+INSERT INTO `detallepedido` (`id`, `cantidad`, `precio`, `Pedido_id`, `Producto_id`) VALUES
+(1, '2', '3000', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -170,6 +209,13 @@ CREATE TABLE `diseno` (
   `nombre` varchar(45) DEFAULT NULL,
   `path` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `diseno`
+--
+
+INSERT INTO `diseno` (`id`, `nombre`, `path`) VALUES
+(1, 'Diseno Prueba', 'askjdhsakjhaskjdhas');
 
 -- --------------------------------------------------------
 
@@ -221,7 +267,7 @@ CREATE TABLE `lapiz` (
   `color_rgb` varchar(8) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `Producto_id` int(11) NOT NULL,
-  `TipoPunta_id` int(11) DEFAULT NULL
+  `TipoPunta_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -235,6 +281,14 @@ CREATE TABLE `marca` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Zebra', 'Productos de Caliad'),
+(2, 'ChiniPapeleria', NULL);
 
 -- --------------------------------------------------------
 
@@ -268,7 +322,7 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id`, `fecha_creacion`, `fecha_termino`, `Usuario_id`, `Venta_id`, `EstadoPedido_id`) VALUES
-(1, '2020-07-30', '2020-08-06', 1, NULL, 1);
+(1, '2020-08-11', '2020-08-18', 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -297,10 +351,18 @@ CREATE TABLE `producto` (
   `nombre` varchar(45) NOT NULL,
   `precio` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
-  `img` varchar(45) DEFAULT NULL,
+  `img` varchar(256) DEFAULT NULL,
   `Categoria_id` int(11) NOT NULL,
   `Marca_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre`, `precio`, `stock`, `img`, `Categoria_id`, `Marca_id`) VALUES
+(1, 'Flash Card Especial', 1500, 100, 'asdasdasdsa', 2, 2),
+(2, 'Agenda Especial', 1500, 100, 'asdsadsadsad', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -313,6 +375,13 @@ CREATE TABLE `seccion` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `seccion`
+--
+
+INSERT INTO `seccion` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Prueba', 'Descripcion de prueba');
 
 -- --------------------------------------------------------
 
@@ -339,6 +408,13 @@ CREATE TABLE `tamaniohoja` (
   `unidad_medida` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tamaniohoja`
+--
+
+INSERT INTO `tamaniohoja` (`id`, `nombre`, `ancho`, `largo`, `unidad_medida`) VALUES
+(1, 'Grande', 100, 100, 'cm');
+
 -- --------------------------------------------------------
 
 --
@@ -350,6 +426,13 @@ CREATE TABLE `tipoespiral` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipoespiral`
+--
+
+INSERT INTO `tipoespiral` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Espiral De Metal', 'Espiral de metal');
 
 -- --------------------------------------------------------
 
@@ -363,6 +446,13 @@ CREATE TABLE `tipohoja` (
   `gramaje` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tipohoja`
+--
+
+INSERT INTO `tipohoja` (`id`, `nombre`, `gramaje`) VALUES
+(1, 'Grande', 100);
+
 -- --------------------------------------------------------
 
 --
@@ -374,6 +464,14 @@ CREATE TABLE `tipolinea` (
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipolinea`
+--
+
+INSERT INTO `tipolinea` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Segmentada', 'Linea Entre Cortada Entre Segmento'),
+(2, 'Punteada', 'Linea Con dividas en espacios con puntos');
 
 -- --------------------------------------------------------
 
@@ -399,6 +497,14 @@ CREATE TABLE `tipopunta` (
   `descripcion` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `tipopunta`
+--
+
+INSERT INTO `tipopunta` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Fina', 'Punta fina 0.5'),
+(2, 'Gruesa', 'punta gruesa 1.0');
+
 -- --------------------------------------------------------
 
 --
@@ -409,6 +515,13 @@ CREATE TABLE `tipotapa` (
   `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tipotapa`
+--
+
+INSERT INTO `tipotapa` (`id`, `nombre`) VALUES
+(1, 'Dura');
 
 -- --------------------------------------------------------
 
@@ -436,7 +549,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `rut`, `codigo_verificacion`, `email`, `numero`, `ciudad`, `calle`, `password`, `remenber_token`, `role`) VALUES
-(1, 'Felipe', 'Alarcon', '19168969', '0', 'felipe@gmail.com', '987845636', 'san carlos', 'san carlos 123', '796891a5852988df8332a2918289c7190ecbb8b59374661116663be07aae3697', NULL, 'ROLE_USER');
+(1, 'Cristobal', 'Bravo', '19071493', '4', 'bravo9542@gmail.com', '956613666', 'Chillan', 'chillan123', '$2y$10$4h/6nFuVG7g7k4hmyfIMjOBoVBpL0AmdkzqLt5pPkPx3lj2O0Vj0.', NULL, 'ROLE_ADMIN');
 
 -- --------------------------------------------------------
 
@@ -490,7 +603,8 @@ ALTER TABLE `confagendadiseno`
 ALTER TABLE `configuracionagenda`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_ConfiguracionAgenda_DetallePedido1_idx` (`DetallePedido_id`),
-  ADD KEY `fk_ConfiguracionAgenda_ColorEspiral1_idx` (`ColorEspiral_id`);
+  ADD KEY `fk_ConfiguracionAgenda_ColorEspiral1_idx` (`ColorEspiral_id`),
+  ADD KEY `fk_ConfiguracionAgenda_Agenda1_idx` (`Agenda_id`);
 
 --
 -- Indices de la tabla `configuracioncuaderno`
@@ -682,25 +796,25 @@ ALTER TABLE `venta`
 -- AUTO_INCREMENT de la tabla `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `colorespiral`
 --
 ALTER TABLE `colorespiral`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracionagenda`
 --
 ALTER TABLE `configuracionagenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracioncuaderno`
@@ -730,13 +844,13 @@ ALTER TABLE `cuaderno`
 -- AUTO_INCREMENT de la tabla `detallepedido`
 --
 ALTER TABLE `detallepedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `diseno`
 --
 ALTER TABLE `diseno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estadopedido`
@@ -760,7 +874,7 @@ ALTER TABLE `lapiz`
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `mediopago`
@@ -784,37 +898,37 @@ ALTER TABLE `planificador`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `seccion`
 --
 ALTER TABLE `seccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tamaniohoja`
 --
 ALTER TABLE `tamaniohoja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tipoespiral`
 --
 ALTER TABLE `tipoespiral`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tipohoja`
 --
 ALTER TABLE `tipohoja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tipolinea`
 --
 ALTER TABLE `tipolinea`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipoplanificador`
@@ -826,13 +940,13 @@ ALTER TABLE `tipoplanificador`
 -- AUTO_INCREMENT de la tabla `tipopunta`
 --
 ALTER TABLE `tipopunta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipotapa`
 --
 ALTER TABLE `tipotapa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -869,13 +983,14 @@ ALTER TABLE `colorespiral`
 -- Filtros para la tabla `confagendadiseno`
 --
 ALTER TABLE `confagendadiseno`
-  ADD CONSTRAINT `fk_ConfAgendaDiseno_ConfiguracionAgenda1` FOREIGN KEY (`ConfiguracionAgenda_id`) REFERENCES `configuracionagenda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ConfAgendaDiseno_ConfiguracionAgenda1` FOREIGN KEY (`ConfiguracionAgenda_id`) REFERENCES `configuracionagenda` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_ConfAgendaDiseno_Diseno1` FOREIGN KEY (`Diseno_id`) REFERENCES `diseno` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `configuracionagenda`
 --
 ALTER TABLE `configuracionagenda`
+  ADD CONSTRAINT `fk_ConfiguracionAgenda_Agenda1` FOREIGN KEY (`Agenda_id`) REFERENCES `agenda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_ConfiguracionAgenda_ColorEspiral1` FOREIGN KEY (`ColorEspiral_id`) REFERENCES `colorespiral` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_ConfiguracionAgenda_DetallePedido1` FOREIGN KEY (`DetallePedido_id`) REFERENCES `detallepedido` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -963,7 +1078,7 @@ ALTER TABLE `producto`
 -- Filtros para la tabla `seccionagenda`
 --
 ALTER TABLE `seccionagenda`
-  ADD CONSTRAINT `fk_SeccionAgenda_Agenda1` FOREIGN KEY (`Agenda_id`) REFERENCES `agenda` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_SeccionAgenda_Agenda1` FOREIGN KEY (`Agenda_id`) REFERENCES `agenda` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_SeccionAgenda_Seccion1` FOREIGN KEY (`Seccion_id`) REFERENCES `seccion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

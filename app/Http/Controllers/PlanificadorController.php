@@ -11,7 +11,7 @@ class PlanificadorController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('api.auth');
+        $this->middleware('api.auth',['except'=>['all']]);
     }
 
     public function all(){
@@ -69,7 +69,7 @@ class PlanificadorController extends Controller
                     'mensaje'=>'El planificador no ha podido crearse',
                     'errores'=>$validate->errors()];
             }else{
-                
+
                 $planificador = new Planificador();
                 $planificador->cantidad_hojas = $request->cantidad_hojas;
                 $planificador->Producto_id=$request->Producto_id;

@@ -16,4 +16,12 @@ class ConfiguracionAgenda extends Model
     public function colorespiral(){
         return $this->belongsTo('App\Models\ColorEpiral', 'ColorEspiral_id');
     }
+
+    public function agenda(){
+        return $this->belongsTo('App\Models\Agenda', 'Agenda_id');
+    }
+
+    public function disenos(){
+        return $this->belongsToMany('App\Models\Diseno','confagendadiseno','ConfiguracionAgenda_id', 'Diseno_id');
+    }
 }

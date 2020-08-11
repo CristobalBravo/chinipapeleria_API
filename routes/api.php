@@ -205,3 +205,10 @@ Route::post('planificador/buscar','planificadorController@buscarPorID');
 Route::post('planificador/crear','planificadorController@crear');
 Route::post('planificador/editar','planificadorController@editar');
 Route::post('planificador/eliminar','planificadorController@eliminar');
+
+//Planificador
+Route::post('configuracionAgenda/all','configuracionAgendaController@all');
+Route::post('configuracionAgenda/buscar','configuracionAgendaController@buscarPorID');
+Route::post('configuracionAgenda/crear','configuracionAgendaController@crear');
+Route::post('configuracionAgenda/editar','configuracionAgendaController@editar');
+Route::post('configuracionAgenda/eliminar','configuracionAgendaController@eliminar');

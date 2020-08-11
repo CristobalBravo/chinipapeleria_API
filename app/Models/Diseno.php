@@ -16,4 +16,8 @@ class Diseno extends Model
     public function confagendadiseno(){
         return $this->hasMany('App\Models\ConfAgendaDiseno');
     }
+
+    public function configuracionAgendas(){
+        return $this->belongsToMany('App\Models\ConfiguracionAgenda','confagendadiseno','Diseno_id', 'ConfiguracionAgenda_id',);
+    }
 }
