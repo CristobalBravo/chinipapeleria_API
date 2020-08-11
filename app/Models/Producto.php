@@ -12,10 +12,10 @@ class Producto extends Model
     public function categoria(){
         return $this->belongsTo('App\Models\Categoria','Categoria_id');
     }
-    /*
+
     public function tipoProducto(){
         return $this->belongsTo('App\Models\TipoProducto','TipoProducto_id');
-    }*/
+    }
 
     public function marca(){
         return $this->belongsTo('App\Models\Marca','Marca_id');

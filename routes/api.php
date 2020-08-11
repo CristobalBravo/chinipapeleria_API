@@ -148,6 +148,10 @@ Route::post('tipoLinea/crear','tipoLineaController@crear');
 Route::post('tipoLinea/editar','tipoLineaController@editar');
 Route::post('tipoLinea/eliminar','tipoLineaController@eliminar');
 
+//TipoProducto
+Route::post('tipoProducto/all', 'TipoProductoController@all');
+
+
 //TipoPunta
 Route::post('tipoPunta/all','tipoPuntaController@all');
 Route::post('tipoPunta/buscar','tipoPuntaController@buscarPorID');
