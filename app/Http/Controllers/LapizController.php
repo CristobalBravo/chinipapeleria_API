@@ -37,7 +37,7 @@ class LapizController extends Controller
 
         try{
             $id = $request->id;
-            $lapiz = Lapiz::findOrFail($id)->load('producto','tipopunta');
+            $lapiz = Lapiz::findOrFail($id)->load('producto','tipopunta', 'producto.marca', 'producto.categoria', 'producto.tipoProducto');
             $result->code = 200;
             $result->status='success';
             $result->lapiz=$lapiz;

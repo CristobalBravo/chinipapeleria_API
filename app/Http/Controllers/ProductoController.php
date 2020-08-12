@@ -17,7 +17,7 @@ class ProductoController extends Controller
 {
 
     public function all(){
-        $producto= Producto::all()->load('categoria', 'marca');
+        $producto= Producto::all()->load('categoria', 'marca', 'tipoproducto');
         $data=[
             'code'=>200,
             'status'=>'success',
@@ -40,7 +40,7 @@ class ProductoController extends Controller
 
         try{
             $id = $request->id;
-            $producto = Producto::findOrFail($id)->load('categoria', 'marca');
+            $producto = Producto::findOrFail($id)->load('categoria', 'marca', 'tipoproducto');
             $result->code = 200;
             $result->status='success';
             $result->producto=$producto;
