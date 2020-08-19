@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('api.auth',['except'=>['registrar']]);
+    }
+
     public function all(Request $request){
         $token = $request->header('Authorization');
         $role= new Role();
@@ -37,16 +42,12 @@ class UsuarioController extends Controller
         $result = new \stdClass();
         $result->code = 200;
 
-        if($request->id == ''){
-            $result->code=400;
-            $result->status='error';
-            $result->message = "Debes seleccionar un id de usuario para buscar";
-            return response()->json($result);
-        }
+        $token = $request->header('Authorization');
+        $jwtAuth = new JwtAuth();
+        $user= $jwtAuth->checkToken($token,true);
 
         try{
-            $id = $request->id;
-            $usuario = User::findOrFail($id);
+            $usuario = User::findOrFail($user->sub);
             $result->code = 200;
             $result->status='success';
             $result->usuario=$usuario;
@@ -55,7 +56,6 @@ class UsuarioController extends Controller
             $result->status='error';
             $result->message='No se encontro el id';
         }
-
         return response()->json($result);
     }
 

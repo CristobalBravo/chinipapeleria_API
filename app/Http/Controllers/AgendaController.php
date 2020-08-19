@@ -17,7 +17,7 @@ class AgendaController extends Controller
         $this->middleware('api.auth', ['except'=>['all','buscarPorID']]);
     }
     public function all(){
-        $Agenda = Agenda::all()->load('secciones');
+        $Agenda = Agenda::all()->load('secciones','producto','tamanioHoja','tipoTapa', 'tipoHoja','producto.marca', 'producto.categoria', 'producto.tipoProducto');
         $data=[
             'code'=> 200,
             'status'=>'success',
@@ -39,7 +39,7 @@ class AgendaController extends Controller
 
         try{
             $id = $request->id;
-            $Agenda = Agenda::findOrFail($id)->load('secciones');
+            $Agenda = Agenda::findOrFail($id)->load('secciones','producto','tamanioHoja','tipoTapa', 'tipoHoja','producto.marca', 'producto.categoria', 'producto.tipoProducto');;
             $result->code = 200;
             $result->status='success';
             $result->Agenda=$Agenda;
