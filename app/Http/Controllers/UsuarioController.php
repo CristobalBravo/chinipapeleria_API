@@ -15,7 +15,7 @@ class UsuarioController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('api.auth',['except'=>['registrar']]);
+        $this->middleware('api.auth',['except'=>['registrar','login']]);
     }
 
     public function all(Request $request){
