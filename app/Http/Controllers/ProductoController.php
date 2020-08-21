@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Helpers\Role;
+use App\Models\Agenda;
 use App\Models\Cuaderno;
 use App\Models\FlashCard;
 use App\Models\Lapiz;
@@ -133,6 +134,15 @@ class ProductoController extends Controller
                     }
                     break;
                 case Producto::AGENDA:
+                    if (!isset($request->cantidad_hojas) || !isset($request->TipoHoja_id)
+                    || !isset($request->TipoTapa_id)  || !isset($request->TamanioHoja_id)) {
+                    $resp = new \stdClass();
+                    $resp->code = 200;
+                    $resp->status = 'error';
+                    $resp->message = 'No cumple con las precondiciones de los campos';
+                    return response(json_encode($resp), 200)
+                        ->header('Content-Type', 'application/json');
+                }
                     break;
                 case Producto::FLASHCARD:
                     if (!isset($request->descripcion) || !isset($request->ancho)
@@ -177,7 +187,13 @@ class ProductoController extends Controller
                     $planificador->save();
                     break;
                 case Producto::AGENDA:
-
+                    $agenda = new Agenda();
+                    $agenda->Producto_id = $producto->id;
+                    $agenda->cantidad_hojas = $request->cantidad_hojas;
+                    $agenda->TamanioHoja_id = $request->TamanioHoja_id;
+                    $agenda->TipoTapa_id = $request->TipoTapa_id;
+                    $agenda->TipoHoja_id = $request->TipoHoja_id;
+                    $agenda->save();
                     break;
                 case Producto::FLASHCARD:
                     $flashcard = new FlashCard();
