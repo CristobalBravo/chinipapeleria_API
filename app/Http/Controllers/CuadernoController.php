@@ -11,11 +11,11 @@ class CuadernoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('api.auth');
+        $this->middleware('api.auth',['except'=>['all']]);
     }
 
     public function all(){
-        $cuaderno = Cuaderno::all()->load('producto');
+        $cuaderno = Cuaderno::all()->load('producto', 'producto.marca', 'producto.categoria', 'producto.tipoProducto');
         $data=[
             'code'=> 200,
             'status'=>'success',
@@ -38,7 +38,7 @@ class CuadernoController extends Controller
 
         try{
             $id = $request->id;
-            $cuaderno = Cuaderno::findOrFail($id)->load('producto');
+            $cuaderno = Cuaderno::findOrFail($id)->load('producto', 'producto.marca', 'producto.categoria', 'producto.tipoProducto');
             $result->code = 200;
             $result->status='success';
             $result->cuaderno=$cuaderno;
@@ -64,7 +64,7 @@ class CuadernoController extends Controller
                     'mensaje'=>'La cuaderno no ha podido crearse',
                     'errores'=>$validate->errors()];
             }else{
-                
+
                 $cuaderno = new Cuaderno();
                 $cuaderno->Producto_id=$request->Producto_id;
                 $cuaderno->save();

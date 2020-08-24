@@ -109,5 +109,37 @@ class PedidoController extends Controller
         return response()->json($result);
     }
 
+    public function asignarVentaPedido(Request $request){
+        $result = new \stdClass();
+        $result->code = 200;
+        if (!isset($request->Venta_id) || !isset($request->id)) {
+                    $resp = new \stdClass();
+                    $resp->code = 400;
+                    $resp->status = 'error';
+                    $resp->message = 'No cumple con las precondiciones de los campos';
+                    return response(json_encode($resp), 400)
+                        ->header('Content-Type', 'application/json');
+        }
+        try{
+            $id = $request->id;
+            $pedido = Pedido::findOrFail($id);
+            if($pedido->Venta_id!=''){
+                $pedido->Venta_id= $request->Venta_id;
+                $pedido->save();
+                $result->code = 200;
+                $result->status='success';
+                $result->message='Venta Asignada Correctamente Exitosamente';
+            }
+            $result->code = 400;
+                $result->status='error';
+                $result->message='No Puedes Asignar el Pedido Tiene registrada una venta';
 
+
+        }catch(ModelNotFoundException $e){
+            $result->code = 400;
+            $result->status='error';
+            $result->message='No se encontro el id';
+        }
+        return response()->json($result);
+    }
 }
