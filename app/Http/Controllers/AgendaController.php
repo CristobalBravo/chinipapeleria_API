@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Agenda;
 use App\Helpers\JwtAuth;
 use App\Helpers\Role;
+use App\Models\ConfiguracionAgenda;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -103,6 +104,10 @@ class AgendaController extends Controller
         }
 
         try{
+            $configuracionAgendas= ConfiguracionAgenda::where('Agenda_id','=',$request->id)->get();
+            foreach($configuracionAgendas as $ca){
+                $ca->delete();
+            }
             $id = $request->id;
             $Agenda = Agenda::findOrFail($id);
             $Agenda->delete();

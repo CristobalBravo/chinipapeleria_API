@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConfiguracionCuaderno;
 use Illuminate\Http\Request;
 use App\Models\Cuaderno;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -126,6 +127,12 @@ class CuadernoController extends Controller
         }
 
         try{
+
+            $configuacionCuadernos= ConfiguracionCuaderno::where('Cuaderno_id','=',$request->id)->get();
+            foreach($configuacionCuadernos as $cc){
+                $cc->delete();
+            }
+
             $id = $request->id;
             $cuaderno = Cuaderno::findOrFail($id);
             $cuaderno->delete();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConfiguracionPlanificador;
 use Illuminate\Http\Request;
 use App\Models\Planificador;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -142,7 +143,12 @@ class PlanificadorController extends Controller
 
         try{
             $id = $request->id;
+            $configuracionPlanificadores= ConfiguracionPlanificador::where('Planificador_id','=',$request->id)->get();
+            foreach($configuracionPlanificadores as $cp){
+                $cp->delete();
+            }
             $planificador = Planificador::findOrFail($id);
+
             $planificador->delete();
             $result->code = 200;
             $result->status='success';
@@ -152,7 +158,6 @@ class PlanificadorController extends Controller
             $result->status='error';
             $result->message='No se encontro el id';
         }
-
         return response()->json($result);
     }
 }

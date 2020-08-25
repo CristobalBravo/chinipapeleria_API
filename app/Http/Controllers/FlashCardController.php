@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\ConfiguracionFlashCard;
 use Illuminate\Http\Request;
 use App\Models\FlashCard;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -62,6 +64,10 @@ class FlashCardController extends Controller
         }
 
         try{
+            $flashCards= ConfiguracionFlashCard::where('FlashCard_id','=',$request->id)->get();
+            foreach($flashCards as $fc){
+                $fc->delete();
+            }
             $id = $request->id;
             $flashCard = FlashCard::findOrFail($id);
             $flashCard->delete();
