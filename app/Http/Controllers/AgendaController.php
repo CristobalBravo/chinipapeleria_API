@@ -15,7 +15,7 @@ class AgendaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('api.auth', ['except'=>['all','buscarPorID']]);
+        $this->middleware('api.auth',['except'=>['all','buscarPorID']]);
     }
     public function all(){
         $Agenda = Agenda::all()->load('secciones','producto','tamanioHoja','tipoTapa', 'tipoHoja','producto.marca', 'producto.categoria', 'producto.tipoProducto');
@@ -105,8 +105,8 @@ class AgendaController extends Controller
 
         try{
             $configuracionAgendas= ConfiguracionAgenda::where('Agenda_id','=',$request->id)->get();
-            foreach($configuracionAgendas as $ca){
-                $ca->delete();
+            foreach($configuracionAgendas as $fc){
+                $fc->delete();
             }
             $id = $request->id;
             $Agenda = Agenda::findOrFail($id);

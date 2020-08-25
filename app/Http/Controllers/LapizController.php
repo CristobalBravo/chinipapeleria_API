@@ -10,7 +10,7 @@ class LapizController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('api.auth',['except'=>['all']]);
+        $this->middleware('api.auth',['except'=>['all','buscarPorID']]);
     }
 
     public function all(){
